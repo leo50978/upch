@@ -732,3 +732,16 @@ Travail realise :
 Resultat :
 
 - baisse importante du poids image total et amelioration attendue sur LCP, charge reseau et rendu initial
+
+### 2026-03-18 - Etape 28
+
+Travail realise :
+
+- correction de l opening sur la page d accueil avec un overlay present directement dans `index.html`
+- le contenu principal reste masque tant que l opening n est pas termine pour eviter de voir le fond du site avant l animation
+- l opening a ete ajuste en mobile-first avec des dimensions fluides
+- correction du rendu du logo header/footer avec une resolution de chemin adaptee entre accueil et pages internes
+
+Resultat :
+
+- l opening doit maintenant apparaitre immediatement a l entree sur la home et le logo doit rester visible sur l accueil

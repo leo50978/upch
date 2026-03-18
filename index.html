@@ -8,6 +8,73 @@
       content="Plateforme institutionnelle LHUPC / AED avec site public administrable et future connexion Firebase."
     />
     <link rel="preload" as="image" href="./PHOTOS/1.jpg" fetchpriority="high" />
+    <link rel="preload" as="image" href="./src/logo/ICON.png" fetchpriority="high" />
+    <style>
+      body.opening-active {
+        overflow: hidden;
+      }
+
+      body.opening-active #app {
+        visibility: hidden;
+      }
+
+      .opening-boot {
+        position: fixed;
+        inset: 0;
+        z-index: 5000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        background:
+          radial-gradient(circle at 18% 16%, rgba(137, 215, 255, 0.2), transparent 32%),
+          radial-gradient(circle at 82% 20%, rgba(255, 80, 211, 0.18), transparent 30%),
+          #ffffff;
+      }
+
+      .opening-boot__card {
+        width: min(100%, 24rem);
+        display: grid;
+        justify-items: center;
+        gap: 0.9rem;
+        padding: clamp(1.4rem, 5vw, 2rem);
+        border-radius: 1.75rem;
+        border: 1px solid rgba(217, 223, 239, 0.9);
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: 0 24px 60px -36px rgba(65, 50, 91, 0.32);
+        text-align: center;
+      }
+
+      .opening-boot__logo {
+        width: clamp(4.5rem, 20vw, 6rem);
+        height: clamp(4.5rem, 20vw, 6rem);
+        object-fit: contain;
+      }
+
+      .opening-boot__quote {
+        margin: 0;
+        font-family: 'Nunito', sans-serif;
+        font-size: clamp(1rem, 4vw, 1.25rem);
+        font-weight: 900;
+        line-height: 1.25;
+        color: #4a4f93;
+      }
+
+      .opening-boot__loader {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 999px;
+        border: 4px solid rgba(255, 82, 192, 0.18);
+        border-top-color: #ff2fbf;
+        animation: opening-boot-spin 1s linear infinite;
+      }
+
+      @keyframes opening-boot-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,12 +83,19 @@
     />
     <script src="./src/js/tw-config.js?v=20260318-2"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./src/styles/main.css?v=20260318-46" />
+    <link rel="stylesheet" href="./src/styles/main.css?v=20260318-47" />
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
     <title>LHUPC / AED</title>
   </head>
-  <body class="min-h-screen bg-[url('./PHOTOS/pexels-justebuka-20407104.jpg')] bg-cover bg-center text-[#25263f] font-sans">
+  <body class="opening-active min-h-screen bg-[url('./PHOTOS/pexels-justebuka-20407104.jpg')] bg-cover bg-center text-[#25263f] font-sans">
+    <div class="opening-boot splash-overlay" data-opening-splash>
+      <div class="opening-boot__card splash-card">
+        <img class="opening-boot__logo splash-logo" src="./src/logo/ICON.png" alt="LHUPC" width="654" height="620" />
+        <p class="opening-boot__quote splash-quote">« Aidons les enfants défavorisés »</p>
+        <div class="opening-boot__loader splash-loader"></div>
+      </div>
+    </div>
     <div id="app"></div>
-    <script type="module" src="./src/js/main.js?v=20260318-29"></script>
+    <script type="module" src="./src/js/main.js?v=20260318-30"></script>
   </body>
 </html>

@@ -1,6 +1,14 @@
 import { getFooterContent } from '../../store/footerStore.js';
 import { escapeHtml } from '../../utils/escapeHtml.js';
 
+function resolveAssetUrl(url) {
+  if (!url) return './src/logo/ICON.png';
+  if (/^(https?:|data:|blob:)/.test(url)) return url;
+  if (!url.startsWith('/')) return url;
+  if (typeof window === 'undefined') return url;
+  return window.location.pathname.startsWith('/pages/') ? `..${url}` : `.${url}`;
+}
+
 function renderFooterColumn(column) {
   const title = escapeHtml(column.title);
   const links = Array.isArray(column.links) ? column.links : [];
@@ -17,7 +25,7 @@ function renderFooterColumn(column) {
 
 export function Footer() {
   const footerContent = getFooterContent();
-  const logoUrl = escapeHtml(footerContent.brand.logoUrl || '/src/logo/ICON.png');
+  const logoUrl = escapeHtml(resolveAssetUrl(footerContent.brand.logoUrl || '/src/logo/ICON.png'));
   const logoAlt = escapeHtml(footerContent.brand.title || 'LHUPC');
 
   return `

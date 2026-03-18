@@ -269,16 +269,18 @@ button {
   display: grid;
   gap: 1rem;
   justify-items: center;
-  padding: 1.8rem 2.2rem;
+  width: min(100%, 24rem);
+  padding: clamp(1.4rem, 5vw, 2rem);
   border-radius: 22px;
   background: rgba(255, 255, 255, 0.94);
   box-shadow: 0 24px 60px -36px rgba(65, 50, 91, 0.32);
   border: 1px solid rgba(217, 223, 239, 0.8);
+  text-align: center;
 }
 
 .splash-logo {
-  width: 86px;
-  height: 86px;
+  width: clamp(4.5rem, 20vw, 6rem);
+  height: clamp(4.5rem, 20vw, 6rem);
   object-fit: contain;
 }
 
@@ -286,7 +288,8 @@ button {
   margin: 0;
   font-family: 'Nunito', sans-serif;
   font-weight: 900;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 4vw, 1.2rem);
+  line-height: 1.25;
   color: #4a4f93;
   text-align: center;
 }

@@ -1,5 +1,5 @@
 import { Header, setupHeader } from './components/layout/header.js?v=20260318-9';
-import { Footer } from './components/layout/footer.js?v=20260317-2';
+import { Footer } from './components/layout/footer.js?v=20260318-3';
 import { initCountAnimations } from './utils/countAnimation.js';
 
 const IMAGES = {
