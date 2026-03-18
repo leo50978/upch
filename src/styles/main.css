@@ -16,6 +16,14 @@
   box-sizing: border-box;
 }
 
+img,
+svg,
+video,
+canvas,
+iframe {
+  max-width: 100%;
+}
+
 html {
   scroll-behavior: smooth;
   width: 100%;
@@ -44,6 +52,32 @@ a {
 
 button {
   font: inherit;
+}
+
+main,
+section,
+article,
+aside,
+header,
+footer,
+nav,
+div,
+figure,
+figcaption {
+  min-width: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+li,
+blockquote {
+  overflow-wrap: anywhere;
 }
 
 .page-shell {

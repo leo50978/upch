@@ -1,4 +1,4 @@
-import { Header, setupHeader } from './components/layout/header.js?v=20260318-10';
+import { Header, setupHeader } from './components/layout/header.js?v=20260318-11';
 import { Footer } from './components/layout/footer.js?v=20260318-4';
 import { initCountAnimations } from './utils/countAnimation.js';
 
@@ -913,8 +913,8 @@ function sectionStyle(gradient) {
   return `min-height:100vh;display:flex;align-items:center;background:${gradient};`;
 }
 
-const eyebrowClass = 'font-display text-sm font-black uppercase tracking-[0.28em] text-[#7c86cb]';
-const overlineBlueClass = 'font-display text-sm font-black uppercase tracking-[0.28em] text-[#7c86cb]';
+const eyebrowClass = 'font-display text-[0.72rem] font-black uppercase tracking-[0.16em] text-[#7c86cb] sm:text-sm sm:tracking-[0.28em]';
+const overlineBlueClass = 'font-display text-[0.72rem] font-black uppercase tracking-[0.16em] text-[#7c86cb] sm:text-sm sm:tracking-[0.28em]';
 const titleClass = 'font-display text-4xl font-black leading-[0.92] text-[#62a9f5] sm:text-5xl';
 const sectionTitleClass = 'font-display text-3xl font-black leading-tight text-[#4d4b7f]';
 const bodyClass = 'font-sans text-base leading-relaxed text-[#7c67a2]';
@@ -954,11 +954,11 @@ function renderAnimatedCount(value = '', className = '') {
 function renderHomeAndLinks() {
   return `
     <div class="flex flex-wrap gap-3">
-      <a href="../index.html" class="inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-[#89d7ff] via-[#5fb4ff] to-[#4d9cf2] px-5 py-3 font-display text-sm font-black text-white shadow-lg shadow-sky-200/50 transition duration-200 hover:-translate-y-0.5">
+      <a href="../index.html" class="inline-flex max-w-full items-center justify-center gap-2 rounded-full bg-gradient-to-b from-[#89d7ff] via-[#5fb4ff] to-[#4d9cf2] px-5 py-3 text-center font-display text-sm font-black text-white shadow-lg shadow-sky-200/50 transition duration-200 hover:-translate-y-0.5">
         Retour a l accueil
         <span data-lucide="arrow-left" class="lucide h-4 w-4"></span>
       </a>
-      <a href="../liens.html" class="inline-flex items-center gap-2 rounded-full border border-brandBlue/20 bg-white px-5 py-3 font-display text-sm font-black text-brandDeep shadow-sm transition duration-200 hover:-translate-y-0.5">
+      <a href="../liens.html" class="inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-brandBlue/20 bg-white px-5 py-3 text-center font-display text-sm font-black text-brandDeep shadow-sm transition duration-200 hover:-translate-y-0.5">
         Voir tous les liens
         <span data-lucide="link" class="lucide h-4 w-4"></span>
       </a>
@@ -971,7 +971,7 @@ function renderPrimaryAction(action, fallback) {
   if (!finalAction) return '';
 
   return `
-    <a href="${esc(finalAction.href)}" class="btn-shake inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-[#ff50d3] via-[#ff2fbf] to-[#d60ab9] px-5 py-3 font-display text-sm font-black text-white shadow-lg shadow-pink-200/50 transition duration-200 hover:-translate-y-0.5">
+    <a href="${esc(finalAction.href)}" class="btn-shake inline-flex max-w-full items-center justify-center gap-2 rounded-full bg-gradient-to-b from-[#ff50d3] via-[#ff2fbf] to-[#d60ab9] px-5 py-3 text-center font-display text-sm font-black text-white shadow-lg shadow-pink-200/50 transition duration-200 hover:-translate-y-0.5">
       ${esc(finalAction.label)}
       <span data-lucide="arrow-up-right" class="lucide h-4 w-4"></span>
     </a>
@@ -999,7 +999,7 @@ function renderHero(section, page, description) {
   const chips = (section.chips || [])
     .map(
       (chip) => `
-        <span class="inline-flex items-center rounded-full border border-white/90 bg-white/90 px-4 py-2 font-display text-xs font-black uppercase tracking-[0.18em] text-brandDeep shadow-sm">
+        <span class="inline-flex max-w-full items-center justify-center rounded-full border border-white/90 bg-white/90 px-4 py-2 text-center font-display text-xs font-black uppercase tracking-[0.12em] sm:tracking-[0.18em] text-brandDeep shadow-sm">
           ${esc(chip)}
         </span>
       `
@@ -1023,7 +1023,7 @@ function renderHero(section, page, description) {
     <section class="px-4 py-10 sm:px-6 lg:px-10" style="${sectionStyle(section.background)}">
       <div class="mx-auto grid w-full max-w-6xl gap-8 lg:grid-cols-[1.02fr,0.98fr] lg:items-center">
         <div class="space-y-6">
-          <div class="inline-flex items-center gap-3 rounded-full border border-white/80 bg-white/85 px-4 py-2 font-display text-xs font-black uppercase tracking-[0.28em] text-[#7c86cb] shadow-sm">
+          <div class="inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-white/80 bg-white/85 px-4 py-2 text-center font-display text-[0.68rem] font-black uppercase tracking-[0.14em] text-[#7c86cb] shadow-sm sm:text-xs sm:tracking-[0.28em]">
             <span>${esc(page.label)}</span>
             <span class="h-1.5 w-1.5 rounded-full bg-brandPink"></span>
             <span>${esc(section.eyebrow)}</span>
@@ -1044,7 +1044,7 @@ function renderHero(section, page, description) {
           <div class="relative overflow-hidden rounded-[2rem] border border-white/80 bg-white shadow-2xl shadow-slate-200/70">
             <img src="${esc(section.image)}" alt="${esc(page.label)}" class="h-[24rem] w-full object-cover md:h-[30rem]" fetchpriority="high" decoding="async" />
             <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/35 to-transparent px-6 py-5">
-              <p class="font-display text-sm font-black uppercase tracking-[0.24em] text-white/80">${esc(page.label)}</p>
+              <p class="font-display text-sm font-black uppercase tracking-[0.14em] sm:tracking-[0.24em] text-white/80">${esc(page.label)}</p>
               <p class="mt-1 font-display text-xl font-black text-white">${esc(section.eyebrow)}</p>
             </div>
           </div>
@@ -1087,7 +1087,7 @@ function renderCards(section) {
           <div class="relative h-[22rem] w-full overflow-hidden">
             <img src="${esc(section.image)}" alt="${esc(section.title)}" class="h-full w-full object-cover" loading="lazy" decoding="async" />
             <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/40 to-transparent px-6 py-5">
-              <p class="font-display text-sm font-black uppercase tracking-[0.24em] text-white/80">${esc(section.imageLabel || 'Image de terrain')}</p>
+              <p class="font-display text-sm font-black uppercase tracking-[0.14em] sm:tracking-[0.24em] text-white/80">${esc(section.imageLabel || 'Image de terrain')}</p>
             </div>
           </div>
           <div class="p-6">
@@ -1147,7 +1147,7 @@ function renderMetrics(section) {
       ({ value, label, text }) => `
         <article class="rounded-[1.75rem] border border-white/80 bg-white p-6 shadow-xl shadow-slate-100">
           <p>${renderAnimatedCount(value, 'font-display text-4xl font-black text-brandDeep')}</p>
-          <p class="mt-2 font-display text-sm font-black uppercase tracking-[0.26em] text-[#7c86cb]">${esc(label)}</p>
+          <p class="mt-2 font-display text-sm font-black uppercase tracking-[0.14em] sm:tracking-[0.26em] text-[#7c86cb]">${esc(label)}</p>
           <p class="mt-4 ${smallBodyClass}">${esc(text)}</p>
         </article>
       `
@@ -1267,7 +1267,7 @@ function renderDocuments(section) {
             <div class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brandBlue/10 text-brandBlue">
               <span data-lucide="${esc(icon)}" class="lucide h-6 w-6"></span>
             </div>
-            <span class="rounded-full bg-slate-50 px-3 py-1 font-display text-xs font-black uppercase tracking-[0.18em] text-[#7c86cb]">${esc(meta)}</span>
+            <span class="rounded-full bg-slate-50 px-3 py-1 text-center font-display text-xs font-black uppercase tracking-[0.12em] sm:tracking-[0.18em] text-[#7c86cb]">${esc(meta)}</span>
           </div>
           <h3 class="mt-5 font-display text-xl font-black text-brandDeep">${esc(title)}</h3>
           <p class="mt-3 ${smallBodyClass}">${esc(text)}</p>

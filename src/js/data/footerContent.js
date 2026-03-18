@@ -46,7 +46,7 @@ export const defaultFooterContent = {
     placeholder: 'Votre email',
     buttonLabel: 'S’abonner'
   },
-  copyright: '© 2024 LHUPC. Tous droits réservés.'
+  copyright: '© 2026 LHUPC. Tous droits réservés.'
 };
 
 export function cloneFooterContent(content = defaultFooterContent) {

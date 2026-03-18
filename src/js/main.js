@@ -1,5 +1,5 @@
 import { subscribeAboutContent } from './store/aboutStore.js';
-import { renderApp } from './app.js?v=20260318-11';
+import { renderApp } from './app.js?v=20260318-12';
 import { subscribeFooterContent } from './store/footerStore.js';
 import { subscribeImpactContent } from './store/impactStore.js';
 import { subscribeHeroContent } from './store/heroStore.js';

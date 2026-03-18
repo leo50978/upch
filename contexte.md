@@ -831,3 +831,16 @@ Travail realise :
 Resultat :
 
 - les liens du site doivent maintenant fonctionner sur GitHub Pages sans renvoyer vers des URLs racine en 404
+
+### 2026-03-18 - Etape 36
+
+Travail realise :
+
+- mise a jour du copyright footer en `2026`
+- ajout de protections globales anti-debordement (`max-width: 100%`, `min-width: 0`, `overflow-wrap`)
+- allègement des espacements et du tracking sur plusieurs composants dynamiques des pages internes
+- ajustement de plusieurs boutons, badges et labels pour qu ils restent dans le viewport sur petit mobile
+
+Resultat :
+
+- aucun contenu ne doit depasser la largeur de l ecran, y compris sur les pages secondaires les plus chargees

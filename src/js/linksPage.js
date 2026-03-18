@@ -1,5 +1,5 @@
-import { Header, setupHeader } from './components/layout/header.js?v=20260318-10';
-import { Footer } from './components/layout/footer.js?v=20260318-4';
+import { Header, setupHeader } from './components/layout/header.js?v=20260318-11';
+import { Footer } from './components/layout/footer.js?v=20260318-5';
 import { getPublicNavigation, getPublicActions } from './data/navigation.js';
 import { escapeHtml } from './utils/escapeHtml.js';
 import { resolveSitePath } from './utils/sitePath.js';
@@ -54,7 +54,7 @@ function LinksSection() {
     <section class="py-10 px-4 sm:px-6 lg:px-10">
       <div class="max-w-6xl mx-auto space-y-6">
         <header class="text-center space-y-2">
-          <p class="font-display text-sm font-black uppercase tracking-[0.3em] text-[#7c86cb]">Navigation</p>
+          <p class="font-display text-sm font-black uppercase tracking-[0.16em] sm:tracking-[0.3em] text-[#7c86cb]">Navigation</p>
           <h1 class="font-display text-3xl sm:text-4xl font-black text-[#62a9f5]">Toutes les pages en un coup d oeil</h1>
           <p class="mx-auto max-w-3xl font-sans text-[#7c67a2]">Retrouvez ici l ensemble des liens presents dans le site, avec un apercu visuel pour vous orienter rapidement.</p>
         </header>

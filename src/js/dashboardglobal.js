@@ -1,6 +1,6 @@
 import { AboutSection } from './components/sections/aboutSection.js?v=20260317-2';
-import { Footer } from './components/layout/footer.js?v=20260318-4';
-import { Header, setupHeader } from './components/layout/header.js?v=20260318-10';
+import { Footer } from './components/layout/footer.js?v=20260318-5';
+import { Header, setupHeader } from './components/layout/header.js?v=20260318-11';
 import { HeroSection } from './components/sections/heroSection.js?v=20260317-3';
 import { ImpactSection } from './components/sections/impactSection.js?v=20260317-2';
 import { ProjectsSection } from './components/sections/projectsSection.js?v=20260317-2';
