@@ -745,3 +745,16 @@ Travail realise :
 Resultat :
 
 - l opening doit maintenant apparaitre immediatement a l entree sur la home et le logo doit rester visible sur l accueil
+
+### 2026-03-18 - Etape 29
+
+Travail realise :
+
+- correction du flux mobile de la home en retirant `content-visibility` sur les grosses sections publiques
+- reduction de la hauteur de la section transparente `bridge` sur mobile pour eviter une coupure visuelle trop forte
+- conservation de la hauteur complete de cette section sur desktop
+- ajustement de la position du background du body sur mobile (`bg-top`) pour un cadrage plus stable
+
+Resultat :
+
+- le fond global doit moins perturber le flux sur mobile et la section transparente doit etre visuellement plus propre
