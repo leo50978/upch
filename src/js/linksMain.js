@@ -1,4 +1,4 @@
-import { renderLinksPage } from './linksPage.js?v=20260318-5';
+import { renderLinksPage } from './linksPage.js?v=20260318-6';
 import { subscribeHeaderContent } from './store/headerStore.js';
 import { subscribeFooterContent } from './store/footerStore.js';
 

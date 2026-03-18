@@ -3,7 +3,7 @@ export const defaultImpactContent = {
   description:
     'Chaque chiffre représente une vie transformée. Grâce à l’éducation, à la nutrition et au soutien communautaire, nous aidons les enfants vulnérables à bâtir un avenir meilleur.',
   ctaLabel: 'Voir le rapport d’impact',
-  ctaHref: '#impact-report',
+  ctaHref: '/pages/impact-transparence.html',
   stats: [
     {
       id: 'impact-stat-1',

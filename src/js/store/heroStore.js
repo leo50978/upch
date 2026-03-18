@@ -16,8 +16,7 @@ export function getHeroContent() {
     }
 
     const parsedValue = JSON.parse(savedValue);
-
-    return {
+    const merged = {
       ...cloneHeroContent(defaultHeroContent),
       ...parsedValue,
       primaryCta: {
@@ -32,6 +31,15 @@ export function getHeroContent() {
         ? parsedValue.cycleTexts
         : cloneHeroContent(defaultHeroContent).cycleTexts
     };
+
+    if (
+      String(merged.primaryCta?.href || '').startsWith('#') ||
+      String(merged.secondaryCta?.href || '').startsWith('#')
+    ) {
+      return cloneHeroContent(defaultHeroContent);
+    }
+
+    return merged;
   } catch (error) {
     console.warn('Hero store reset after read error:', error);
     return cloneHeroContent(defaultHeroContent);

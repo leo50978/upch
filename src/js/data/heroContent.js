@@ -4,11 +4,11 @@ export const defaultHeroContent = {
     'Rejoignez-nous pour changer la vie des enfants défavorisés grâce aux soins, à l’éducation et au soutien.',
   primaryCta: {
     label: 'S’impliquer',
-    href: '#about'
+    href: '/pages/s-impliquer.html'
   },
   secondaryCta: {
     label: 'Faire un don',
-    href: '#donate'
+    href: '/pages/faire-un-don.html'
   },
   imageUrl: 'PHOTOS/1.jpg',
   cycleTexts: [

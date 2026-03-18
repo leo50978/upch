@@ -11,43 +11,66 @@
     <link rel="preload" as="image" href="./src/logo/ICON.png" fetchpriority="high" />
     <style>
       body.opening-active {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100svh;
         overflow: hidden;
+        overscroll-behavior: none;
       }
 
       body.opening-active #app {
-        visibility: hidden;
+        display: none;
       }
 
       .opening-boot {
         position: fixed;
         inset: 0;
         z-index: 5000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        display: grid;
+        place-items: center;
+        width: 100%;
+        height: 100dvh;
+        overflow: hidden;
         padding: 1rem;
         background:
           radial-gradient(circle at 18% 16%, rgba(137, 215, 255, 0.2), transparent 32%),
           radial-gradient(circle at 82% 20%, rgba(255, 80, 211, 0.18), transparent 30%),
           #ffffff;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.42s ease, visibility 0.42s ease;
+      }
+
+      .opening-boot.is-hidden {
+        opacity: 0;
+        visibility: hidden;
       }
 
       .opening-boot__card {
-        width: min(100%, 24rem);
+        position: relative;
+        width: min(22rem, 100%);
         display: grid;
         justify-items: center;
         gap: 0.9rem;
-        padding: clamp(1.4rem, 5vw, 2rem);
+        padding: clamp(1.2rem, 4vw, 1.9rem);
         border-radius: 1.75rem;
         border: 1px solid rgba(217, 223, 239, 0.9);
         background: rgba(255, 255, 255, 0.96);
         box-shadow: 0 24px 60px -36px rgba(65, 50, 91, 0.32);
         text-align: center;
+        transform: scale(1);
+        transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease;
+      }
+
+      .opening-boot.is-hidden .opening-boot__card {
+        opacity: 0;
+        transform: translateY(14px) scale(0.96);
       }
 
       .opening-boot__logo {
-        width: clamp(4.5rem, 20vw, 6rem);
-        height: clamp(4.5rem, 20vw, 6rem);
+        width: clamp(4.2rem, 19vw, 5.8rem);
+        height: clamp(4.2rem, 19vw, 5.8rem);
         object-fit: contain;
       }
 
@@ -61,8 +84,8 @@
       }
 
       .opening-boot__loader {
-        width: 3rem;
-        height: 3rem;
+        width: 2.8rem;
+        height: 2.8rem;
         border-radius: 999px;
         border: 4px solid rgba(255, 82, 192, 0.18);
         border-top-color: #ff2fbf;
@@ -83,19 +106,19 @@
     />
     <script src="./src/js/tw-config.js?v=20260318-2"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./src/styles/main.css?v=20260318-49" />
+    <link rel="stylesheet" href="./src/styles/main.css?v=20260318-53" />
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
     <title>LHUPC / AED</title>
   </head>
   <body class="opening-active min-h-screen bg-white text-[#25263f] font-sans">
-    <div class="opening-boot splash-overlay" data-opening-splash>
-      <div class="opening-boot__card splash-card">
-        <img class="opening-boot__logo splash-logo" src="./src/logo/ICON.png" alt="LHUPC" width="654" height="620" />
-        <p class="opening-boot__quote splash-quote">« Aidons les enfants défavorisés »</p>
-        <div class="opening-boot__loader splash-loader"></div>
+    <div class="opening-boot" data-opening-splash>
+      <div class="opening-boot__card">
+        <img class="opening-boot__logo" src="./src/logo/ICON.png" alt="LHUPC" width="654" height="620" />
+        <p class="opening-boot__quote">« Aidons les enfants défavorisés »</p>
+        <div class="opening-boot__loader"></div>
       </div>
     </div>
     <div id="app"></div>
-    <script type="module" src="./src/js/main.js?v=20260318-32"></script>
+    <script type="module" src="./src/js/main.js?v=20260318-35"></script>
   </body>
 </html>

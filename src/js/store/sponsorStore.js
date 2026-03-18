@@ -49,6 +49,15 @@ export function getSponsorContent() {
         cloneSponsorContent(defaultSponsorContent).leftCard.photoUrl;
     }
 
+    const hasLegacyAnchors =
+      String(merged.leftCard?.primaryCta?.href || '').startsWith('#') ||
+      String(merged.leftCard?.secondaryCta?.href || '').startsWith('#') ||
+      String(merged.rightCard?.videoHref || '').startsWith('#');
+
+    if (hasLegacyAnchors) {
+      return cloneSponsorContent(defaultSponsorContent);
+    }
+
     return merged;
   } catch (error) {
     console.warn('Sponsor store reset after read error:', error);

@@ -769,3 +769,65 @@ Travail realise :
 Resultat :
 
 - la home revient a un flux continu sans fond photo global ni coupure transparente
+
+### 2026-03-18 - Etape 31
+
+Travail realise :
+
+- correction mobile first des grilles principales de l accueil avec une seule colonne par defaut au lieu de cartes en `minmax(260px, 1fr)`
+- ajout d un mode tres petit ecran pour compacter le header, le bouton menu et les espacements
+- protection supplementaire contre les coupures de mots dans les grands titres sur petit mobile
+
+Resultat :
+
+- le contenu ne doit plus forcer un debordement horizontal ni donner un effet de dezoom vers la gauche sur les petits ecrans
+
+### 2026-03-18 - Etape 32
+
+Travail realise :
+
+- refonte du composant opening de la home pour un comportement plus propre sur petit mobile
+- styles dedies a l opening sans dependre des anciennes classes `splash-*`
+- ajout d une sortie plus douce avec fade + leger mouvement du bloc
+- adaptation du padding avec `safe-area` pour les petits ecrans
+
+Resultat :
+
+- l opening doit maintenant bien commencer et mieux se terminer sur mobile first
+
+### 2026-03-18 - Etape 33
+
+Travail realise :
+
+- recentrage strict de la carte opening avec `position: fixed`, `top: 50%`, `left: 50%`
+- largeur de la carte limitee a `calc(100vw - 2rem)` pour rester stable sur petit mobile
+
+Resultat :
+
+- l opening doit rester fixe au milieu de l ecran sur mobile pendant toute son animation
+
+### 2026-03-18 - Etape 34
+
+Travail realise :
+
+- correction du vrai probleme de largeur pendant l opening : `#app` est maintenant retire du flux avec `display: none` tant que l opening est actif
+- verrouillage du `body` en `position: fixed` pendant l opening
+- renforcement global de `html` et `body` avec `width/max-width: 100%` et `overflow-x: hidden`
+- recentrage de l opening via son overlay fixe en `grid` pour eviter tout decalage residuel
+
+Resultat :
+
+- le body ne doit plus depasser la largeur de l ecran pendant l opening sur mobile
+
+### 2026-03-18 - Etape 35
+
+Travail realise :
+
+- correction des liens pour GitHub Pages avec un resolver de base path (`src/js/utils/sitePath.js`)
+- adaptation du header, footer, logo et page `liens` pour prefixer correctement les URLs sur le depot `upch`
+- migration des anciens CTA internes `#...` vers de vraies pages dans les contenus hero, impact, projets et parrainage
+- ajout de migrations store pour reinitialiser les anciennes URLs locales encore sauvegardees en `localStorage`
+
+Resultat :
+
+- les liens du site doivent maintenant fonctionner sur GitHub Pages sans renvoyer vers des URLs racine en 404

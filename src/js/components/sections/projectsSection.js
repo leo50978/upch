@@ -1,5 +1,6 @@
 import { getProjectsContent } from '../../store/projectsStore.js';
 import { escapeHtml } from '../../utils/escapeHtml.js';
+import { resolveSitePath } from '../../utils/sitePath.js';
 
 function clampPercent(value) {
   const number = Number(value);
@@ -67,7 +68,7 @@ function renderProjectCard(card) {
   const amountRaised = renderAnimatedCurrency(card.amountRaised);
   const goalAmount = renderAnimatedCurrency(card.goalAmount);
   const ctaLabel = escapeHtml(card.ctaLabel);
-  const ctaHref = escapeHtml(card.ctaHref);
+  const ctaHref = escapeHtml(resolveSitePath(card.ctaHref));
   const progressPercent = clampPercent(card.progressPercent);
   const imageUrl = escapeHtml(card.imageUrl || 'PHOTOS/2.jpg');
 

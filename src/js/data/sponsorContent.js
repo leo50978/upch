@@ -14,11 +14,11 @@ export const defaultSponsorContent = {
     ],
     primaryCta: {
       label: 'Découvrir son histoire',
-      href: '#learn-more'
+      href: '/pages/parrainer-un-enfant.html'
     },
     secondaryCta: {
       label: 'Voir d’autres enfants',
-      href: '#children'
+      href: '/pages/s-impliquer.html'
     }
   },
   rightCard: {
@@ -27,7 +27,7 @@ export const defaultSponsorContent = {
       'Un don mensuel de 39 $ assure aux enfants vivant dans la pauvreté un accès à des soins, un soutien scolaire, des compétences de vie et une formation professionnelle avant leur diplôme.',
     videoTitle: 'Parrainage : mode d’emploi',
     videoCtaLabel: 'Lire la vidéo',
-    videoHref: '#video'
+    videoHref: '/pages/parrainer-un-enfant.html'
   }
 };
 

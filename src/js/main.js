@@ -1,5 +1,5 @@
 import { subscribeAboutContent } from './store/aboutStore.js';
-import { renderApp } from './app.js?v=20260318-10';
+import { renderApp } from './app.js?v=20260318-11';
 import { subscribeFooterContent } from './store/footerStore.js';
 import { subscribeImpactContent } from './store/impactStore.js';
 import { subscribeHeroContent } from './store/heroStore.js';
@@ -89,7 +89,7 @@ function showOpeningSplash() {
       overlay.remove();
       document.body.classList.remove('opening-active');
     }, 400);
-  }, 1800);
+  }, 2100);
 }
 
 if (root) {

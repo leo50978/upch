@@ -16,8 +16,7 @@ export function getImpactContent() {
     }
 
     const parsedValue = JSON.parse(savedValue);
-
-    return {
+    const merged = {
       title:
         typeof parsedValue.title === 'string' && parsedValue.title.trim()
           ? parsedValue.title
@@ -38,6 +37,12 @@ export function getImpactContent() {
         ? parsedValue.stats
         : cloneImpactContent(defaultImpactContent).stats
     };
+
+    if (String(merged.ctaHref || '').startsWith('#')) {
+      return cloneImpactContent(defaultImpactContent);
+    }
+
+    return merged;
   } catch (error) {
     console.warn('Impact store reset after read error:', error);
     return cloneImpactContent(defaultImpactContent);

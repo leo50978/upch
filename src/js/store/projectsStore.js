@@ -16,8 +16,7 @@ export function getProjectsContent() {
     }
 
     const parsedValue = JSON.parse(savedValue);
-
-    return {
+    const merged = {
       title: typeof parsedValue.title === 'string' && parsedValue.title.trim()
         ? parsedValue.title
         : cloneProjectsContent(defaultProjectsContent).title,
@@ -28,6 +27,12 @@ export function getProjectsContent() {
         ? parsedValue.cards
         : cloneProjectsContent(defaultProjectsContent).cards
     };
+
+    if (merged.cards.some((card) => String(card?.ctaHref || '').startsWith('#'))) {
+      return cloneProjectsContent(defaultProjectsContent);
+    }
+
+    return merged;
   } catch (error) {
     console.warn('Projects store reset after read error:', error);
     return cloneProjectsContent(defaultProjectsContent);

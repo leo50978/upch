@@ -1,7 +1,8 @@
-import { Header, setupHeader } from './components/layout/header.js?v=20260318-9';
-import { Footer } from './components/layout/footer.js?v=20260318-3';
+import { Header, setupHeader } from './components/layout/header.js?v=20260318-10';
+import { Footer } from './components/layout/footer.js?v=20260318-4';
 import { getPublicNavigation, getPublicActions } from './data/navigation.js';
 import { escapeHtml } from './utils/escapeHtml.js';
+import { resolveSitePath } from './utils/sitePath.js';
 
 const gallery = [
   'PHOTOS/1.jpg',
@@ -25,7 +26,7 @@ function LinksSection() {
 
   const cards = items.map((item, idx) => {
     const label = escapeHtml(item.label);
-    const href = escapeHtml(item.href || '#');
+    const href = escapeHtml(resolveSitePath(item.href || '#'));
     const img = pickImage(idx);
 
     return `

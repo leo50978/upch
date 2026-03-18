@@ -1,5 +1,6 @@
 import { getSponsorContent } from '../../store/sponsorStore.js';
 import { escapeHtml } from '../../utils/escapeHtml.js';
+import { resolveSitePath } from '../../utils/sitePath.js';
 
 function renderAccentTitle(title) {
   const safeTitle = escapeHtml(title);
@@ -17,9 +18,9 @@ function renderLeftCard(leftCard) {
   const location = escapeHtml(leftCard.location);
   const flag = escapeHtml(leftCard.flagEmoji || '');
   const primaryLabel = escapeHtml(leftCard.primaryCta.label);
-  const primaryHref = escapeHtml(leftCard.primaryCta.href);
+  const primaryHref = escapeHtml(resolveSitePath(leftCard.primaryCta.href));
   const secondaryLabel = escapeHtml(leftCard.secondaryCta.label);
-  const secondaryHref = escapeHtml(leftCard.secondaryCta.href);
+  const secondaryHref = escapeHtml(resolveSitePath(leftCard.secondaryCta.href));
   const photoUrl = escapeHtml(leftCard.photoUrl || 'PHOTOS/5.jpg');
 
   return `
@@ -48,7 +49,7 @@ function renderRightCard(rightCard) {
   const title = escapeHtml(rightCard.title);
   const description = escapeHtml(rightCard.description);
   const videoTitle = escapeHtml(rightCard.videoTitle);
-  const videoHref = escapeHtml(rightCard.videoHref);
+  const videoHref = escapeHtml(resolveSitePath(rightCard.videoHref));
   const videoLabel = escapeHtml(rightCard.videoCtaLabel);
 
   return `

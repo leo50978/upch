@@ -1,5 +1,6 @@
 import { getImpactContent } from '../../store/impactStore.js';
 import { escapeHtml } from '../../utils/escapeHtml.js';
+import { resolveSitePath } from '../../utils/sitePath.js';
 
 function renderImpactIcon(variant) {
   if (variant === 'communities') {
@@ -56,7 +57,7 @@ export function ImpactSection() {
   const title = renderImpactTitle(impactContent.title);
   const description = escapeHtml(impactContent.description);
   const ctaLabel = escapeHtml(impactContent.ctaLabel);
-  const ctaHref = escapeHtml(impactContent.ctaHref);
+  const ctaHref = escapeHtml(resolveSitePath(impactContent.ctaHref));
 
   return `
     <section id="impact" class="impact-section">

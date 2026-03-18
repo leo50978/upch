@@ -1,14 +1,15 @@
 import { getHeroContent } from '../../store/heroStore.js';
 import { escapeHtml } from '../../utils/escapeHtml.js';
+import { resolveSitePath } from '../../utils/sitePath.js';
 
 export function HeroSection() {
   const heroContent = getHeroContent();
   const title = escapeHtml(heroContent.title);
   const description = escapeHtml(heroContent.description);
   const primaryLabel = escapeHtml(heroContent.primaryCta.label);
-  const primaryHref = escapeHtml(heroContent.primaryCta.href);
+  const primaryHref = escapeHtml(resolveSitePath(heroContent.primaryCta.href));
   const secondaryLabel = escapeHtml(heroContent.secondaryCta.label);
-  const secondaryHref = escapeHtml(heroContent.secondaryCta.href);
+  const secondaryHref = escapeHtml(resolveSitePath(heroContent.secondaryCta.href));
   const imageUrl = escapeHtml(heroContent.imageUrl || 'PHOTOS/1.jpg');
   const cycleTexts = Array.isArray(heroContent.cycleTexts) && heroContent.cycleTexts.length
     ? heroContent.cycleTexts

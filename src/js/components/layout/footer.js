@@ -1,13 +1,6 @@
 import { getFooterContent } from '../../store/footerStore.js';
 import { escapeHtml } from '../../utils/escapeHtml.js';
-
-function resolveAssetUrl(url) {
-  if (!url) return './src/logo/ICON.png';
-  if (/^(https?:|data:|blob:)/.test(url)) return url;
-  if (!url.startsWith('/')) return url;
-  if (typeof window === 'undefined') return url;
-  return window.location.pathname.startsWith('/pages/') ? `..${url}` : `.${url}`;
-}
+import { resolveSitePath } from '../../utils/sitePath.js';
 
 function renderFooterColumn(column) {
   const title = escapeHtml(column.title);
@@ -17,7 +10,7 @@ function renderFooterColumn(column) {
     <div>
       <p class="site-footer__heading">${title}</p>
       ${links
-        .map((link) => `<a href="${escapeHtml(link.href)}">${escapeHtml(link.label)}</a>`)
+        .map((link) => `<a href="${escapeHtml(resolveSitePath(link.href))}">${escapeHtml(link.label)}</a>`)
         .join('')}
     </div>
   `;
@@ -25,7 +18,7 @@ function renderFooterColumn(column) {
 
 export function Footer() {
   const footerContent = getFooterContent();
-  const logoUrl = escapeHtml(resolveAssetUrl(footerContent.brand.logoUrl || '/src/logo/ICON.png'));
+  const logoUrl = escapeHtml(resolveSitePath(footerContent.brand.logoUrl || '/src/logo/ICON.png'));
   const logoAlt = escapeHtml(footerContent.brand.title || 'LHUPC');
 
   return `

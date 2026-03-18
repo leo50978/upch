@@ -18,11 +18,16 @@
 
 html {
   scroll-behavior: smooth;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
   color: var(--text);
   font-family: 'Poppins', sans-serif;
@@ -637,7 +642,7 @@ button {
 .about-section__grid {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .about-card {
@@ -767,7 +772,7 @@ button {
   display: grid;
   gap: 1rem;
   margin-top: 0.6rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .impact-card {
@@ -967,7 +972,7 @@ button {
   display: grid;
   gap: 1rem;
   margin-top: 1.35rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .sponsor-section {
@@ -1552,6 +1557,52 @@ button {
 .site-footer__bottom p {
   font-size: 0.84rem;
   color: rgba(255, 255, 255, 0.78);
+}
+
+@media (max-width: 389px) {
+  .site-header__bar {
+    gap: 0.5rem;
+    min-height: 72px;
+    padding: 0.75rem;
+  }
+
+  .brand-logo {
+    gap: 0.55rem;
+  }
+
+  .brand-logo__icon {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+  }
+
+  .brand-logo__title {
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+  }
+
+  .menu-toggle {
+    width: 46px;
+    height: 46px;
+    flex-basis: 46px;
+  }
+
+  .hero-section__copy,
+  .about-section__shell,
+  .impact-section__shell,
+  .projects-section__shell,
+  .sponsor-section__shell,
+  .site-footer__inner {
+    padding-inline: 0.75rem;
+  }
+
+  .hero-section__title,
+  .about-section__title,
+  .impact-section__title,
+  .projects-section__title,
+  .sponsor-section__title {
+    word-break: break-word;
+  }
 }
 
 @media (min-width: 700px) {

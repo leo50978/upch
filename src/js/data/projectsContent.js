@@ -12,7 +12,7 @@ export const defaultProjectsContent = {
       goalAmount: '$5,000',
       progressPercent: 50,
       ctaLabel: 'Donner pour ce projet',
-      ctaHref: '#donate',
+      ctaHref: '/pages/faire-un-don.html',
       imageUrl: 'PHOTOS/2.jpg'
     },
     {
@@ -25,7 +25,7 @@ export const defaultProjectsContent = {
       goalAmount: '$10,000',
       progressPercent: 30,
       ctaLabel: 'Soutenir ce projet',
-      ctaHref: '#donate',
+      ctaHref: '/pages/faire-un-don.html',
       imageUrl: 'PHOTOS/3.jpg'
     },
     {
@@ -38,7 +38,7 @@ export const defaultProjectsContent = {
       goalAmount: '$4,000',
       progressPercent: 30,
       ctaLabel: 'Donner maintenant',
-      ctaHref: '#donate',
+      ctaHref: '/pages/faire-un-don.html',
       imageUrl: 'PHOTOS/4.jpg'
     }
   ]

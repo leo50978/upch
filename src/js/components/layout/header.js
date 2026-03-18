@@ -1,5 +1,6 @@
 import { getHeaderContent } from '../../store/headerStore.js';
 import { escapeHtml } from '../../utils/escapeHtml.js';
+import { resolveSitePath, stripSiteBasePath } from '../../utils/sitePath.js';
 import { BrandLogo } from './brandLogo.js?v=20260318-3';
 
 function normalizePathname(pathname = '') {
@@ -12,7 +13,7 @@ function normalizePathname(pathname = '') {
 function getCurrentPathname() {
   if (typeof window === 'undefined') return '/';
 
-  const pathname = normalizePathname(window.location.pathname);
+  const pathname = normalizePathname(stripSiteBasePath(window.location.pathname));
   return pathname === '/' ? '/index.html' : pathname;
 }
 
@@ -21,7 +22,7 @@ function getItemPathname(href = '') {
 
   try {
     const url = new URL(href, typeof window !== 'undefined' ? window.location.origin : 'http://localhost');
-    const pathname = normalizePathname(url.pathname);
+    const pathname = normalizePathname(stripSiteBasePath(url.pathname));
     return pathname === '/' ? '/index.html' : pathname;
   } catch {
     return normalizePathname(href);
@@ -42,7 +43,7 @@ function isNavItemActive(item) {
 function renderNavItem(item, mobile = false) {
   const activeClass = isNavItemActive(item) ? (mobile ? 'is-active-mobile' : 'is-active') : '';
   const label = escapeHtml(item.label);
-  const href = escapeHtml(item.href);
+  const href = escapeHtml(resolveSitePath(item.href));
 
   return `
     <a class="header-link ${mobile ? 'header-link--mobile' : ''} ${activeClass}" href="${href}" data-close-menu>
@@ -53,7 +54,7 @@ function renderNavItem(item, mobile = false) {
 
 function renderAction(action, mobile = false) {
   const label = escapeHtml(action.label);
-  const href = escapeHtml(action.href);
+  const href = escapeHtml(resolveSitePath(action.href));
   const variant = action.variant === 'secondary' ? 'secondary' : 'primary';
 
   return `
@@ -69,7 +70,7 @@ function renderAction(action, mobile = false) {
 
 export function Header() {
   const headerContent = getHeaderContent();
-  const brandHref = escapeHtml(headerContent.brand.href || '/');
+  const brandHref = escapeHtml(resolveSitePath(headerContent.brand.href || '/'));
   const brandAriaLabel = escapeHtml(headerContent.brand.ariaLabel || 'LHUPC / AED');
   const mobileNavigation = [
     { id: 'nav-home-mobile', label: 'ACCUEIL', href: '/index.html' },
