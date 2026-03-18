@@ -5,7 +5,6 @@ import { AboutSection } from './components/sections/aboutSection.js?v=20260317-2
 import { ProjectsSection } from './components/sections/projectsSection.js?v=20260317-2';
 import { SponsorSection } from './components/sections/sponsorSection.js?v=20260317-2';
 import { ImpactSection } from './components/sections/impactSection.js?v=20260317-2';
-import { BridgeSection } from './components/sections/bridgeSection.js?v=20260318-3';
 
 let destroyHeader = () => {};
 let destroyHero = () => {};
@@ -20,7 +19,6 @@ export function renderApp(root) {
       ${HeroSection()}
       ${AboutSection()}
       ${ImpactSection()}
-      ${BridgeSection()}
       ${ProjectsSection()}
       ${SponsorSection()}
     </main>

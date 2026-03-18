@@ -758,3 +758,14 @@ Travail realise :
 Resultat :
 
 - le fond global doit moins perturber le flux sur mobile et la section transparente doit etre visuellement plus propre
+
+### 2026-03-18 - Etape 30
+
+Travail realise :
+
+- suppression de l image de fond du `body` sur la page d accueil
+- suppression de la section transparente situee entre impact et projets sur l accueil
+
+Resultat :
+
+- la home revient a un flux continu sans fond photo global ni coupure transparente
