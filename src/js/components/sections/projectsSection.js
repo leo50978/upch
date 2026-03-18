@@ -75,7 +75,7 @@ function renderProjectCard(card) {
     <article class="project-card ${tone.cardClass}">
       <p class="project-card__kicker">${kicker}</p>
       <div class="project-card__photo-shell">
-        <img class="project-card__photo" src="${imageUrl}" alt="${title}" loading="lazy" />
+        <img class="project-card__photo" src="${imageUrl}" alt="${title}" loading="lazy" decoding="async" />
       </div>
       <h3 class="project-card__title">${title}</h3>
       <p class="project-card__description">${description}</p>

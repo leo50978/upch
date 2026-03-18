@@ -36,7 +36,7 @@ export function HeroSection() {
             <div class="hero-section__mist hero-section__mist--left"></div>
             <div class="hero-section__mist hero-section__mist--bottom"></div>
             <div class="hero-section__image">
-              <img class="hero-photo" src="${imageUrl}" alt="Enfants accompagnés par LHUPC / AED" loading="lazy" />
+              <img class="hero-photo" src="${imageUrl}" alt="Enfants accompagnés par LHUPC / AED" fetchpriority="high" decoding="async" />
             </div>
           </div>
         </div>

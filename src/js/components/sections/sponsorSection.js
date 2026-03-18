@@ -26,7 +26,7 @@ function renderLeftCard(leftCard) {
     <article class="sponsor-card sponsor-card--profile">
       <div class="sponsor-card__profile">
         <div class="sponsor-card__photo-shell" aria-hidden="true">
-          <img class="sponsor-card__photo" src="${photoUrl}" alt="${name}" loading="lazy" />
+          <img class="sponsor-card__photo" src="${photoUrl}" alt="${name}" loading="lazy" decoding="async" />
         </div>
         <div class="sponsor-card__profile-info">
           <h3>${name}, ${age}</h3>

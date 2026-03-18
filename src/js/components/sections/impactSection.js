@@ -30,8 +30,8 @@ function renderImpactCard(stat) {
   return `
     <article class="impact-card impact-card--${variant}">
       <div class="impact-card__media">
-        <img class="impact-media impact-media--base" src="${imageUrl}" alt="${title}" loading="lazy" />
-        <img class="impact-media impact-media--alt" src="${imageAltUrl}" alt="${title}" loading="lazy" />
+        <img class="impact-media impact-media--base" src="${imageUrl}" alt="${title}" loading="lazy" decoding="async" />
+        <img class="impact-media impact-media--alt" src="${imageAltUrl}" alt="${title}" loading="lazy" decoding="async" />
       </div>
       <div class="impact-card__icon">${renderImpactIcon(stat.variant)}</div>
       <p class="impact-card__value" data-count-target="${numericTarget}" data-count-suffix="${suffix}">${value}</p>

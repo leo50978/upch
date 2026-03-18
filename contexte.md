@@ -715,3 +715,20 @@ A chaque prochaine etape, il faudra mettre a jour au minimum :
 - `Journal des avancees`
 
 Ce document doit toujours refleter la realite exacte du projet.
+
+### 2026-03-18 - Etape 27
+
+Travail realise :
+
+- optimisation forte des images du projet (recompression + redimensionnement des assets du dossier `PHOTOS` et des logos JPG)
+- suppression des meta `no-cache` sur les pages publiques et secondaires pour ne plus penaliser la mise en cache
+- preload de l image hero sur `index.html` et chargement prioritaire de l image hero
+- suppression du `bg-fixed` sur le body de l accueil pour reduire le cout de rendu
+- splash d ouverture limite a la page d accueil, affiche une seule fois par session et raccourci
+- suppression du splash sur `liens.html`
+- animation flash du header convertie en animation `transform` pour eviter les animations non composees
+- ajout de `content-visibility` sur les sections sous la ligne de flottaison
+
+Resultat :
+
+- baisse importante du poids image total et amelioration attendue sur LCP, charge reseau et rendu initial

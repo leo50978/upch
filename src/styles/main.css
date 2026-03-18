@@ -375,7 +375,7 @@ button {
   top: -35%;
   bottom: -35%;
   width: 34%;
-  left: -42%;
+  left: 0;
   pointer-events: none;
   background: linear-gradient(
     90deg,
@@ -385,8 +385,9 @@ button {
     rgba(255, 255, 255, 0.18) 78%,
     rgba(255, 255, 255, 0) 100%
   );
-  transform: skewX(-24deg) translate3d(0, 0, 0);
+  transform: translate3d(-160%, 0, 0) skewX(-24deg);
   animation: header-action-flash 14s infinite ease-in-out;
+  will-change: transform, opacity;
 }
 
 .header-action--mobile {
@@ -410,7 +411,7 @@ button {
 @keyframes header-action-flash {
   0%,
   100% {
-    left: -42%;
+    transform: translate3d(-160%, 0, 0) skewX(-24deg);
     opacity: 0;
   }
 
@@ -419,41 +420,49 @@ button {
   }
 
   11% {
-    left: 108%;
+    transform: translate3d(260%, 0, 0) skewX(-24deg);
     opacity: 0.95;
   }
 
   16% {
-    left: 108%;
+    transform: translate3d(260%, 0, 0) skewX(-24deg);
     opacity: 0;
   }
 
   50% {
-    left: 108%;
+    transform: translate3d(260%, 0, 0) skewX(24deg);
     opacity: 0;
   }
 
   54% {
-    left: 108%;
+    transform: translate3d(260%, 0, 0) skewX(24deg);
     opacity: 0.95;
-    transform: skewX(24deg) translate3d(0, 0, 0);
   }
 
   61% {
-    left: -42%;
+    transform: translate3d(-160%, 0, 0) skewX(24deg);
     opacity: 0.95;
-    transform: skewX(24deg) translate3d(0, 0, 0);
   }
 
   66% {
-    left: -42%;
+    transform: translate3d(-160%, 0, 0) skewX(24deg);
     opacity: 0;
   }
 
   67%,
   99% {
-    transform: skewX(-24deg) translate3d(0, 0, 0);
+    transform: translate3d(-160%, 0, 0) skewX(-24deg);
   }
+}
+
+.about-section,
+.impact-section,
+.bridge-section,
+.projects-section,
+.sponsor-section,
+.site-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
 }
 
 .hero-section {

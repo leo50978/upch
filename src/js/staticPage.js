@@ -1,4 +1,4 @@
-import { Header, setupHeader } from './components/layout/header.js?v=20260318-8';
+import { Header, setupHeader } from './components/layout/header.js?v=20260318-9';
 import { Footer } from './components/layout/footer.js?v=20260317-2';
 import { initCountAnimations } from './utils/countAnimation.js';
 
@@ -1042,7 +1042,7 @@ function renderHero(section, page, description) {
 
         <div class="grid gap-4 md:grid-cols-[1.1fr,0.9fr]">
           <div class="relative overflow-hidden rounded-[2rem] border border-white/80 bg-white shadow-2xl shadow-slate-200/70">
-            <img src="${esc(section.image)}" alt="${esc(page.label)}" class="h-[24rem] w-full object-cover md:h-[30rem]" loading="lazy" />
+            <img src="${esc(section.image)}" alt="${esc(page.label)}" class="h-[24rem] w-full object-cover md:h-[30rem]" fetchpriority="high" decoding="async" />
             <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/35 to-transparent px-6 py-5">
               <p class="font-display text-sm font-black uppercase tracking-[0.24em] text-white/80">${esc(page.label)}</p>
               <p class="mt-1 font-display text-xl font-black text-white">${esc(section.eyebrow)}</p>
@@ -1085,7 +1085,7 @@ function renderCards(section) {
       <div class="mx-auto grid w-full max-w-6xl gap-8 lg:grid-cols-[0.95fr,1.05fr] lg:items-center">
         <div class="overflow-hidden rounded-[2rem] border border-white/80 bg-white shadow-2xl shadow-slate-100">
           <div class="relative h-[22rem] w-full overflow-hidden">
-            <img src="${esc(section.image)}" alt="${esc(section.title)}" class="h-full w-full object-cover" loading="lazy" />
+            <img src="${esc(section.image)}" alt="${esc(section.title)}" class="h-full w-full object-cover" loading="lazy" decoding="async" />
             <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/40 to-transparent px-6 py-5">
               <p class="font-display text-sm font-black uppercase tracking-[0.24em] text-white/80">${esc(section.imageLabel || 'Image de terrain')}</p>
             </div>
@@ -1219,7 +1219,7 @@ function renderSpotlight(section) {
 
   const image = `
     <div class="overflow-hidden rounded-[2rem] border border-white/80 bg-white shadow-2xl shadow-slate-100">
-      <img src="${esc(section.image)}" alt="${esc(section.imageAlt || section.title)}" class="h-[28rem] w-full object-cover" loading="lazy" />
+      <img src="${esc(section.image)}" alt="${esc(section.imageAlt || section.title)}" class="h-[28rem] w-full object-cover" loading="lazy" decoding="async" />
     </div>
   `;
 
@@ -1237,7 +1237,7 @@ function renderGallery(section) {
     .map(
       ({ src, caption }, index) => `
         <figure class="overflow-hidden rounded-[1.75rem] border border-white/80 bg-white shadow-xl shadow-slate-100 ${index === 0 ? 'sm:col-span-2' : ''}">
-          <img src="${esc(src)}" alt="${esc(caption)}" class="h-${index === 0 ? '[20rem]' : '[16rem]'} w-full object-cover" loading="lazy" />
+          <img src="${esc(src)}" alt="${esc(caption)}" class="h-${index === 0 ? '[20rem]' : '[16rem]'} w-full object-cover" loading="lazy" decoding="async" />
           <figcaption class="p-4 font-display text-sm font-bold text-brandDeep">${esc(caption)}</figcaption>
         </figure>
       `

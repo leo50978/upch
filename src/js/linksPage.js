@@ -1,4 +1,4 @@
-import { Header, setupHeader } from './components/layout/header.js?v=20260318-8';
+import { Header, setupHeader } from './components/layout/header.js?v=20260318-9';
 import { Footer } from './components/layout/footer.js?v=20260317-2';
 import { getPublicNavigation, getPublicActions } from './data/navigation.js';
 import { escapeHtml } from './utils/escapeHtml.js';
@@ -31,7 +31,7 @@ function LinksSection() {
     return `
       <a href="${href}" class="group relative overflow-hidden rounded-3xl border border-white/70 shadow-xl bg-white/90 backdrop-blur hover:-translate-y-1 transition-transform duration-200">
         <div class="h-48 w-full overflow-hidden">
-          <img src="${img}" alt="${label}" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+          <img src="${img}" alt="${label}" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" decoding="async" />
         </div>
         <div class="p-5 flex items-start gap-3">
           <div class="p-3 rounded-2xl bg-gradient-to-br from-brandBlue/15 to-brandPink/20 text-brandDeep">

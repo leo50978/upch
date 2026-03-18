@@ -9,7 +9,7 @@ export function BrandLogo(brand = {}) {
   return `
     <div class="brand-logo">
       <div class="brand-logo__icon" aria-hidden="true">
-        <img src="${logoUrl}" alt="${logoAlt}" loading="lazy" decoding="async" />
+        <img src="${logoUrl}" alt="${logoAlt}" width="654" height="620" decoding="async" />
       </div>
       <div class="brand-logo__text">
         <span class="brand-logo__title">${title}</span>

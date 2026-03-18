@@ -1,5 +1,5 @@
 import { subscribeAboutContent } from './store/aboutStore.js';
-import { renderApp } from './app.js?v=20260317-6';
+import { renderApp } from './app.js?v=20260318-7';
 import { subscribeFooterContent } from './store/footerStore.js';
 import { subscribeImpactContent } from './store/impactStore.js';
 import { subscribeHeroContent } from './store/heroStore.js';
@@ -9,6 +9,7 @@ import { subscribeSponsorContent } from './store/sponsorStore.js';
 import { initCountAnimations } from './utils/countAnimation.js';
 
 const root = document.getElementById('app');
+const SPLASH_SESSION_KEY = 'lhupc-opening-splash-shown';
 
 function applyLucideIcons(scope = document) {
   if (typeof window === 'undefined') {
@@ -76,6 +77,16 @@ function showOpeningSplash() {
     return;
   }
 
+  try {
+    if (window.sessionStorage.getItem(SPLASH_SESSION_KEY) === '1') {
+      return;
+    }
+
+    window.sessionStorage.setItem(SPLASH_SESSION_KEY, '1');
+  } catch {
+    // Ignore storage failures and continue with the visual fallback.
+  }
+
   if (document.querySelector('.splash-overlay')) {
     return;
   }
@@ -84,7 +95,7 @@ function showOpeningSplash() {
   overlay.className = 'splash-overlay';
   overlay.innerHTML = `
     <div class="splash-card">
-      <img class="splash-logo" src="src/logo/ICON.png" alt="LHUPC" loading="lazy" decoding="async" />
+      <img class="splash-logo" src="src/logo/ICON.png" alt="LHUPC" width="654" height="620" decoding="async" />
       <p class="splash-quote">« Aidons les enfants défavorisés »</p>
       <div class="splash-loader"></div>
     </div>
@@ -97,7 +108,7 @@ function showOpeningSplash() {
     window.setTimeout(() => {
       overlay.remove();
     }, 400);
-  }, 3000);
+  }, 1200);
 }
 
 if (root) {

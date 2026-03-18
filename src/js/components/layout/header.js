@@ -1,6 +1,6 @@
 import { getHeaderContent } from '../../store/headerStore.js';
 import { escapeHtml } from '../../utils/escapeHtml.js';
-import { BrandLogo } from './brandLogo.js';
+import { BrandLogo } from './brandLogo.js?v=20260318-2';
 
 function normalizePathname(pathname = '') {
   if (!pathname) return '/';
