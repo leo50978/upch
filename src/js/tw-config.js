@@ -8,7 +8,7 @@ window.tailwind.config = {
     'bg-brandBlue', 'bg-brandPink', 'bg-brandBlue/10', 'bg-brandBlue/30', 'bg-gradient-to-t',
     'max-w-2xl', 'max-w-3xl', 'max-w-6xl', 'max-w-5xl', 'max-w-4xl', 'mx-auto', 'grid', 'w-full', 'h-full', 'h-52',
     'h-48', 'h-12', 'h-8', 'h-7', 'h-6', 'h-4', 'h-3.5', 'h-1.5', 'w-12', 'w-8', 'w-7', 'w-6', 'w-4', 'w-3.5', 'w-1.5', 'w-px',
-    'h-[16rem]', 'h-[20rem]', 'h-[22rem]', 'h-[24rem]', 'h-[28rem]', 'h-[calc(100%-3rem)]', 'md:h-[30rem]',
+    'h-[16rem]', 'h-[20rem]', 'h-[22rem]', 'h-[24rem]', 'h-[28rem]', 'h-[calc(100%-3rem)]', 'h-[calc(100%-4.5rem)]', 'md:h-[30rem]',
     'lg:grid-cols-[1.05fr,0.95fr]', 'lg:grid-cols-[1.02fr,0.98fr]', 'lg:grid-cols-[0.95fr,1.05fr]', 'md:grid-cols-[1.1fr,0.9fr]',
     'md:grid-cols-2', 'sm:grid-cols-2', 'sm:grid-cols-3', 'lg:grid-cols-3', 'lg:grid-cols-4', 'sm:col-span-2',
     'rounded-3xl', 'rounded-2xl', 'rounded-full', 'rounded-[1.75rem]', 'rounded-[2rem]', 'rounded-[2.5rem]',
@@ -20,7 +20,8 @@ window.tailwind.config = {
     'text-brandBlue', 'text-brandPink', 'text-brandDeep', 'text-slate-500', 'text-slate-600', 'text-white', 'text-white/80', 'leading-relaxed', 'leading-tight',
     'text-[#5f6487]', 'text-[#6b7094]', 'text-[#7c67a2]', 'text-[#726f9b]', 'text-[#62a9f5]', 'text-[#4d4b7f]', 'text-[#7c86cb]', 'text-transparent', 'bg-clip-text', 'leading-[0.92]',
     'tracking-[0.18em]', 'tracking-[0.2em]', 'tracking-[0.24em]', 'tracking-[0.25em]', 'tracking-[0.26em]', 'tracking-[0.28em]', 'tracking-[0.3em]',
-    'inline-flex', 'items-center', 'items-start', 'justify-center', 'justify-between', 'flex-wrap', 'flex-col', 'relative', 'absolute', 'inset-0', 'inset-x-0', 'bottom-0', 'top-6', 'left-6', 'z-10', 'overflow-hidden', 'object-cover', 'shrink-0', 'hidden', 'md:block',
+    'inline-flex', 'block', 'items-center', 'items-start', 'justify-center', 'justify-between', 'flex-wrap', 'flex-col', 'relative', 'absolute', 'inset-0', 'inset-x-0', 'bottom-0', 'top-6', 'top-16', 'left-6', 'left-8', 'z-10', 'overflow-hidden', 'object-cover', 'shrink-0', 'self-start', 'hidden', 'sm:block', 'md:block',
+    'sm:flex-row', 'sm:items-start', 'opacity-0',
     'transition', 'transition-transform', 'duration-200', 'duration-300', 'hover:-translate-y-0.5', 'hover:-translate-y-1', 'group', 'group-hover:scale-105', 'from-black/10', 'from-black/35', 'from-black/40', 'to-transparent',
     'uppercase', 'mt-0.5', 'mt-1', 'mt-2', 'mt-3', 'mt-4', 'mt-5', 'mt-6', 'mt-8', 'sm:px-10', 'sm:py-10', 'sm:text-3xl', 'sm:text-4xl', 'sm:text-5xl', 'sm:text-lg', 'lg:items-center', 'lg:items-start',
     // Gradients utilisés dans les presets (from / to)

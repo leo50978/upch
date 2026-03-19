@@ -1109,17 +1109,47 @@ function renderCards(section) {
   `;
 }
 
+function getTimelineIcon(step = {}, index = 0) {
+  const title = String(step.title || '').toLowerCase();
+
+  if (title.includes('ecout')) return 'ear';
+  if (title.includes('prior')) return 'list-todo';
+  if (title.includes('execut') || title.includes('execution')) return 'play';
+  if (title.includes('partag') || title.includes('diffus')) return 'send';
+  if (title.includes('redact')) return 'square-pen';
+  if (title.includes('valid')) return 'badge-check';
+  if (title.includes('revis')) return 'refresh-cw';
+  if (title.includes('cadr')) return 'target';
+  if (title.includes('protot')) return 'flask-conical';
+  if (title.includes('capital')) return 'book-copy';
+  if (title.includes('terrain')) return 'map-pinned';
+  if (title.includes('support')) return 'lifebuoy';
+  if (title.includes('accompagn')) return 'hand-heart';
+  if (title.includes('supprimer')) return 'trash-2';
+  if (title.includes('corriger')) return 'square-pen';
+  if (title.includes('recuper')) return 'download';
+  if (title.includes('savoir')) return 'eye';
+
+  const fallbackIcons = ['sparkles', 'waypoints', 'rocket', 'flag'];
+  return fallbackIcons[index % fallbackIcons.length];
+}
+
 function renderTimeline(section) {
   const steps = (section.steps || [])
     .map(
-      ({ label, title, text }, index) => `
+      (step, index) => `
         <article class="relative rounded-[1.75rem] border border-white/80 bg-white p-5 shadow-lg shadow-slate-100">
-          <div class="absolute left-6 top-6 hidden h-[calc(100%-3rem)] w-px bg-slate-100 md:block ${index === (section.steps || []).length - 1 ? 'opacity-0' : ''}"></div>
-          <div class="flex items-start gap-4">
-            <div class="relative z-10 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brandBlue to-brandPink font-display text-sm font-black text-white shadow-lg shadow-indigo-100">${esc(label)}</div>
-            <div>
-              <h3 class="font-display text-xl font-black text-brandDeep">${esc(title)}</h3>
-              <p class="mt-3 ${smallBodyClass}">${esc(text)}</p>
+          <div class="absolute left-8 top-16 hidden h-[calc(100%-4.5rem)] w-px bg-slate-100 sm:block ${index === (section.steps || []).length - 1 ? 'opacity-0' : ''}"></div>
+          <div class="flex flex-col gap-4 sm:flex-row sm:items-start">
+            <div class="relative z-10 shrink-0 self-start">
+              <div class="inline-flex h-8 w-8 items-center justify-center text-brandBlue">
+                <span data-lucide="${getTimelineIcon(step, index)}" class="lucide h-5 w-5"></span>
+              </div>
+            </div>
+            <div class="min-w-0">
+              <p class="font-display text-xs font-black uppercase tracking-[0.14em] text-[#7c86cb]">${esc(step.label)}</p>
+              <h3 class="font-display text-xl font-black text-brandDeep">${esc(step.title)}</h3>
+              <p class="mt-3 ${smallBodyClass}">${esc(step.text)}</p>
             </div>
           </div>
         </article>

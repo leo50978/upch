@@ -844,3 +844,75 @@ Travail realise :
 Resultat :
 
 - aucun contenu ne doit depasser la largeur de l ecran, y compris sur les pages secondaires les plus chargees
+
+### 2026-03-18 - Etape 37
+
+Travail realise :
+
+- correction de la section `Parcours` des pages internes
+- sur mobile, le marqueur numerote ne reserve plus une colonne visuelle a gauche
+- la carte passe maintenant en empilement vertical sur petit ecran puis redevient laterale sur les tailles superieures
+
+Resultat :
+
+- la section `Parcours` ne doit plus donner l impression d un espace vide prevu pour une icone sur mobile
+
+### 2026-03-18 - Etape 38
+
+Travail realise :
+
+- ajout d icones Lucide visibles dans toutes les cartes de la section `Parcours`
+- conservation du repere numerote sous l icone pour garder la logique de progression
+- mise a jour du cache des pages internes pour forcer le rechargement du nouveau rendu
+
+Resultat :
+
+- toutes les sections `Parcours` des pages internes affichent maintenant une vraie icone au lieu d un simple espace reserve
+
+### 2026-03-18 - Etape 39
+
+Travail realise :
+
+- suppression de l ancien repere vertical visible trop haut dans la section `Parcours`
+- le trait de progression ne commence maintenant qu au niveau du nouveau bloc icone + label
+
+Resultat :
+
+- l ancienne zone vide de la timeline ne doit plus rester visible au-dessus des nouvelles icones
+
+### 2026-03-18 - Etape 40
+
+Travail realise :
+
+- suppression du vrai ancien carre numerote dans les cartes `Parcours`
+- le repere est maintenant affiche comme un petit label texte au-dessus du titre
+
+Resultat :
+
+- il ne doit plus rester qu une seule forme visuelle a gauche : l icone
+
+### 2026-03-18 - Etape 41
+
+Travail realise :
+
+- suppression du fond carre/degrade restant autour de l icone dans les cartes `Parcours`
+- l icone est maintenant affichee seule, sans bloc colore derriere
+- mise a jour du cache des pages internes pour forcer le nouveau rendu
+
+Resultat :
+
+- le bloc inspecte dans le navigateur avec fond degrade ne doit plus apparaitre
+
+### 2026-03-18 - Etape 42
+
+Travail realise :
+
+- transformation de `pages/faire-un-don.html` en vraie page de don dediee a Wise
+- creation de `src/js/donationPage.js` avec un parcours de don complet : hero, carte de paiement, usages du don, parcours Wise, reassurance et CTA final
+- ajout d une selection de montants avec mise a jour dynamique du resume de don
+- harmonisation de la page avec les polices, couleurs, icones Lucide et boutons importants du site global
+- extension de `src/js/tw-config.js` pour couvrir les nouvelles classes utilitaires injectees par la page
+
+Resultat :
+
+- tous les liens `Faire un don` menent toujours vers la meme URL, mais cette URL affiche maintenant une page de don Wise beaucoup plus riche et cohérente avec le reste du site
