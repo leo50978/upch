@@ -1,4 +1,7 @@
+import { defaultImpactContent, defaultImpactContentFr } from '../../data/impactContent.js';
+import { localizeContent } from '../../i18n/localize.js';
 import { getImpactContent } from '../../store/impactStore.js';
+import { getLanguage } from '../../store/languageStore.js';
 import { escapeHtml } from '../../utils/escapeHtml.js';
 import { resolveSitePath } from '../../utils/sitePath.js';
 
@@ -45,6 +48,10 @@ function renderImpactCard(stat) {
 function renderImpactTitle(title) {
   const safeTitle = escapeHtml(title);
 
+  if (safeTitle.toLowerCase().includes('numbers')) {
+    return safeTitle.replace(/numbers/i, '<span class="impact-section__title-accent">numbers</span>');
+  }
+
   if (!safeTitle.toLowerCase().includes('chiffres')) {
     return safeTitle;
   }
@@ -53,7 +60,13 @@ function renderImpactTitle(title) {
 }
 
 export function ImpactSection() {
-  const impactContent = getImpactContent();
+  const locale = getLanguage();
+  const impactContent = localizeContent(
+    getImpactContent(),
+    defaultImpactContent,
+    defaultImpactContentFr,
+    locale
+  );
   const title = renderImpactTitle(impactContent.title);
   const description = escapeHtml(impactContent.description);
   const ctaLabel = escapeHtml(impactContent.ctaLabel);

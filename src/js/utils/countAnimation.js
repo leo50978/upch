@@ -1,12 +1,16 @@
+import { getLanguage } from '../store/languageStore.js';
+
 function formatCount(value, decimals = 0) {
+  const locale = getLanguage() === 'fr' ? 'fr-FR' : 'en-US';
+
   if (decimals > 0) {
-    return value.toLocaleString('fr-FR', {
+    return value.toLocaleString(locale, {
       minimumFractionDigits: decimals,
       maximumFractionDigits: decimals
     });
   }
 
-  return Math.floor(value).toLocaleString('fr-FR');
+  return Math.floor(value).toLocaleString(locale);
 }
 
 export function initCountAnimations(scope = document) {

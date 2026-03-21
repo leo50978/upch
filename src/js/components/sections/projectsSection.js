@@ -1,4 +1,7 @@
+import { defaultProjectsContent, defaultProjectsContentFr } from '../../data/projectsContent.js';
+import { localizeContent, pickLocalized } from '../../i18n/localize.js';
 import { getProjectsContent } from '../../store/projectsStore.js';
+import { getLanguage } from '../../store/languageStore.js';
 import { escapeHtml } from '../../utils/escapeHtml.js';
 import { resolveSitePath } from '../../utils/sitePath.js';
 
@@ -61,6 +64,7 @@ function renderAnimatedCurrency(value) {
 }
 
 function renderProjectCard(card) {
+  const locale = getLanguage();
   const tone = getProjectTone(card.variant);
   const kicker = escapeHtml(card.kicker);
   const title = escapeHtml(card.title);
@@ -71,6 +75,8 @@ function renderProjectCard(card) {
   const ctaHref = escapeHtml(resolveSitePath(card.ctaHref));
   const progressPercent = clampPercent(card.progressPercent);
   const imageUrl = escapeHtml(card.imageUrl || 'PHOTOS/2.jpg');
+  const fundingLabel = escapeHtml(pickLocalized(locale, 'Raised', 'Collecte'));
+  const progressLabel = escapeHtml(pickLocalized(locale, 'Funding progress', 'Progression du financement'));
 
   return `
     <article class="project-card ${tone.cardClass}">
@@ -80,8 +86,8 @@ function renderProjectCard(card) {
       </div>
       <h3 class="project-card__title">${title}</h3>
       <p class="project-card__description">${description}</p>
-      <p class="project-card__raised">Collecte : <strong>${amountRaised}</strong> / ${goalAmount}</p>
-      <div class="project-card__progress" aria-label="Progression du financement">
+      <p class="project-card__raised">${fundingLabel}: <strong>${amountRaised}</strong> / ${goalAmount}</p>
+      <div class="project-card__progress" aria-label="${progressLabel}">
         <span class="project-card__progress-bar ${tone.progressClass}" style="width: ${progressPercent}%;"></span>
       </div>
       <a class="project-card__cta ${tone.ctaClass} btn-shake" href="${ctaHref}">${ctaLabel}</a>
@@ -90,7 +96,13 @@ function renderProjectCard(card) {
 }
 
 export function ProjectsSection() {
-  const projectsContent = getProjectsContent();
+  const locale = getLanguage();
+  const projectsContent = localizeContent(
+    getProjectsContent(),
+    defaultProjectsContent,
+    defaultProjectsContentFr,
+    locale
+  );
   const title = escapeHtml(projectsContent.title);
   const description = escapeHtml(projectsContent.description);
 

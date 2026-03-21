@@ -1,12 +1,23 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Plateforme institutionnelle LHUPC / AED avec site public administrable et future connexion Firebase."
+      content="LHUPC / AED institutional platform with an editable public website and upcoming Firebase connection."
     />
+    <script>
+      (() => {
+        try {
+          const saved = window.localStorage.getItem('lhupc-language');
+          const detected = (window.navigator.language || '').toLowerCase().startsWith('fr') ? 'fr' : 'en';
+          document.documentElement.lang = saved || detected;
+        } catch {
+          document.documentElement.lang = 'en';
+        }
+      })();
+    </script>
     <link rel="preload" as="image" href="./PHOTOS/1.jpg" fetchpriority="high" />
     <link rel="preload" as="image" href="./src/logo/ICON.png" fetchpriority="high" />
     <style>
@@ -114,7 +125,7 @@
     <div class="opening-boot" data-opening-splash>
       <div class="opening-boot__card">
         <img class="opening-boot__logo" src="./src/logo/ICON.png" alt="LHUPC" width="654" height="620" />
-        <p class="opening-boot__quote">« Aidons les enfants défavorisés »</p>
+        <p class="opening-boot__quote">"Helping underprivileged children"</p>
         <div class="opening-boot__loader"></div>
       </div>
     </div>

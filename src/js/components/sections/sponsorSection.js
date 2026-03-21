@@ -1,9 +1,16 @@
+import { defaultSponsorContent, defaultSponsorContentFr } from '../../data/sponsorContent.js';
+import { localizeContent } from '../../i18n/localize.js';
 import { getSponsorContent } from '../../store/sponsorStore.js';
+import { getLanguage } from '../../store/languageStore.js';
 import { escapeHtml } from '../../utils/escapeHtml.js';
 import { resolveSitePath } from '../../utils/sitePath.js';
 
 function renderAccentTitle(title) {
   const safeTitle = escapeHtml(title);
+
+  if (safeTitle.includes('end poverty')) {
+    return safeTitle.replace('end poverty', '<span class="sponsor-section__title-accent">end poverty</span>');
+  }
 
   if (!safeTitle.includes('mettre fin à la pauvreté')) {
     return safeTitle;
@@ -72,7 +79,13 @@ function renderRightCard(rightCard) {
 }
 
 export function SponsorSection() {
-  const sponsorContent = getSponsorContent();
+  const locale = getLanguage();
+  const sponsorContent = localizeContent(
+    getSponsorContent(),
+    defaultSponsorContent,
+    defaultSponsorContentFr,
+    locale
+  );
   const title = renderAccentTitle(sponsorContent.title);
   const description = escapeHtml(sponsorContent.description);
 

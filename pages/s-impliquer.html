@@ -1,9 +1,20 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="LHUPC / AED — S’impliquer" />
+    <meta name="description" content="See how you can contribute through sponsorship, partnerships, events, fundraising, or logistical support." />
+    <script>
+      (() => {
+        try {
+          const saved = window.localStorage.getItem('lhupc-language');
+          const detected = (window.navigator.language || '').toLowerCase().startsWith('fr') ? 'fr' : 'en';
+          document.documentElement.lang = saved || detected;
+        } catch {
+          document.documentElement.lang = 'en';
+        }
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,14 +25,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../src/styles/main.css?v=20260318-54" />
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <title>LHUPC / AED — S’impliquer</title>
+    <title>LHUPC / AED - Get involved</title>
   </head>
   <body class="min-h-screen bg-slate-50 text-[#25263f] font-sans">
     <div
       id="static-app"
-      data-title="S’impliquer"
-      data-subtitle="Agir avec nous"
-      data-description="Découvrez comment vous pouvez contribuer : mécénat, partenariats, événements, collectes ou soutien logistique."
+      data-page-key="s-impliquer"
+      data-description="See how you can contribute through sponsorship, partnerships, events, fundraising, or logistical support."
       data-image="../PHOTOS/pexels-speakmediauganda-35305044.jpg"
     ></div>
     <script type="module" src="../src/js/staticPage.js?v=20260318-17"></script>

@@ -1,9 +1,20 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="LHUPC / AED — Parrainer un enfant" />
+    <meta name="description" content="Provide ongoing support for a child through education, health, and care. Learn how sponsorship works." />
+    <script>
+      (() => {
+        try {
+          const saved = window.localStorage.getItem('lhupc-language');
+          const detected = (window.navigator.language || '').toLowerCase().startsWith('fr') ? 'fr' : 'en';
+          document.documentElement.lang = saved || detected;
+        } catch {
+          document.documentElement.lang = 'en';
+        }
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,14 +25,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../src/styles/main.css?v=20260318-54" />
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <title>LHUPC / AED — Parrainer un enfant</title>
+    <title>LHUPC / AED - Sponsor a child</title>
   </head>
   <body class="min-h-screen bg-slate-50 text-[#25263f] font-sans">
     <div
       id="static-app"
-      data-title="Parrainer un enfant"
-      data-subtitle="Agir avec nous"
-      data-description="Offrez un soutien régulier à un enfant : scolarité, santé et accompagnement. Découvrez comment fonctionne le parrainage."
+      data-page-key="parrainer-un-enfant"
+      data-description="Provide ongoing support for a child through education, health, and care. Learn how sponsorship works."
       data-image="../PHOTOS/3.jpg"
     ></div>
     <script type="module" src="../src/js/staticPage.js?v=20260318-17"></script>

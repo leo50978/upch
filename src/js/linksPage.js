@@ -1,6 +1,9 @@
+import { defaultHeaderContent, defaultHeaderContentFr } from './data/headerContent.js';
 import { Header, setupHeader } from './components/layout/header.js?v=20260318-11';
 import { Footer } from './components/layout/footer.js?v=20260318-5';
 import { getPublicNavigation, getPublicActions } from './data/navigation.js';
+import { localizeContent, pickLocalized } from './i18n/localize.js';
+import { getLanguage } from './store/languageStore.js';
 import { escapeHtml } from './utils/escapeHtml.js';
 import { resolveSitePath } from './utils/sitePath.js';
 
@@ -20,9 +23,32 @@ function pickImage(index = 0) {
 }
 
 function LinksSection() {
-  const nav = getPublicNavigation();
-  const actions = getPublicActions();
+  const locale = getLanguage();
+  const nav = localizeContent(
+    getPublicNavigation(),
+    defaultHeaderContent.navigation,
+    defaultHeaderContentFr.navigation,
+    locale
+  );
+  const actions = localizeContent(
+    getPublicActions(),
+    defaultHeaderContent.actions,
+    defaultHeaderContentFr.actions,
+    locale
+  );
   const items = [...nav, ...actions];
+  const sectionTag = escapeHtml(pickLocalized(locale, 'Navigation', 'Navigation'));
+  const sectionTitle = escapeHtml(pickLocalized(locale, 'All pages at a glance', 'Toutes les pages en un coup d oeil'));
+  const sectionDescription = escapeHtml(
+    pickLocalized(
+      locale,
+      'Browse all site links here, with a visual preview to help visitors find their way quickly.',
+      'Retrouvez ici l ensemble des liens presents dans le site, avec un apercu visuel pour vous orienter rapidement.'
+    )
+  );
+  const cardDescription = escapeHtml(
+    pickLocalized(locale, 'Open the related page', 'Decouvrir la page associee')
+  );
 
   const cards = items.map((item, idx) => {
     const label = escapeHtml(item.label);
@@ -40,7 +66,7 @@ function LinksSection() {
           </div>
           <div class="flex-1">
             <h3 class="font-display text-xl font-black text-[#4d4b7f]">${label}</h3>
-            <p class="mt-1 font-sans text-sm text-[#7c67a2]">Decouvrir la page associee</p>
+            <p class="mt-1 font-sans text-sm text-[#7c67a2]">${cardDescription}</p>
           </div>
           <div class="text-brandBlue">
             <span data-lucide="arrow-up-right" class="lucide w-6 h-6"></span>
@@ -54,9 +80,9 @@ function LinksSection() {
     <section class="py-10 px-4 sm:px-6 lg:px-10">
       <div class="max-w-6xl mx-auto space-y-6">
         <header class="text-center space-y-2">
-          <p class="font-display text-sm font-black uppercase tracking-[0.16em] sm:tracking-[0.3em] text-[#7c86cb]">Navigation</p>
-          <h1 class="font-display text-3xl sm:text-4xl font-black text-[#62a9f5]">Toutes les pages en un coup d oeil</h1>
-          <p class="mx-auto max-w-3xl font-sans text-[#7c67a2]">Retrouvez ici l ensemble des liens presents dans le site, avec un apercu visuel pour vous orienter rapidement.</p>
+          <p class="font-display text-sm font-black uppercase tracking-[0.16em] sm:tracking-[0.3em] text-[#7c86cb]">${sectionTag}</p>
+          <h1 class="font-display text-3xl sm:text-4xl font-black text-[#62a9f5]">${sectionTitle}</h1>
+          <p class="mx-auto max-w-3xl font-sans text-[#7c67a2]">${sectionDescription}</p>
         </header>
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           ${cards}

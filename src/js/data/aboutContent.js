@@ -3,6 +3,32 @@ export const defaultAboutContent = {
     {
       id: 'about-card-1',
       variant: 'mission',
+      title: 'Our mission',
+      description: 'Support and empower underprivileged children',
+      imageUrl: 'PHOTOS/1.jpg'
+    },
+    {
+      id: 'about-card-2',
+      variant: 'programs',
+      title: 'Our programs',
+      description: 'Education, health, and nutrition support for children',
+      imageUrl: 'PHOTOS/2.jpg'
+    },
+    {
+      id: 'about-card-3',
+      variant: 'help',
+      title: 'How to help',
+      description: 'Different ways to get involved and make an impact',
+      imageUrl: 'PHOTOS/3.jpg'
+    }
+  ]
+};
+
+export const defaultAboutContentFr = {
+  cards: [
+    {
+      id: 'about-card-1',
+      variant: 'mission',
       title: 'Notre mission',
       description: 'Soutenir et autonomiser les enfants défavorisés',
       imageUrl: 'PHOTOS/1.jpg'

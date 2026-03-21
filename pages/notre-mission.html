@@ -1,9 +1,20 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="LHUPC / AED — Notre mission" />
+    <meta name="description" content="Our mission is to protect, support, and empower every underprivileged child through a comprehensive and sustainable approach." />
+    <script>
+      (() => {
+        try {
+          const saved = window.localStorage.getItem('lhupc-language');
+          const detected = (window.navigator.language || '').toLowerCase().startsWith('fr') ? 'fr' : 'en';
+          document.documentElement.lang = saved || detected;
+        } catch {
+          document.documentElement.lang = 'en';
+        }
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,14 +25,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../src/styles/main.css?v=20260318-54" />
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-    <title>LHUPC / AED — Notre mission</title>
+    <title>LHUPC / AED - Our mission</title>
   </head>
   <body class="min-h-screen bg-slate-50 text-[#25263f] font-sans">
     <div
       id="static-app"
-      data-title="Notre mission"
-      data-subtitle="À propos"
-      data-description="Notre mission : protéger, soutenir et émanciper chaque enfant défavorisé grâce à une approche globale et durable."
+      data-page-key="notre-mission"
+      data-description="Our mission is to protect, support, and empower every underprivileged child through a comprehensive and sustainable approach."
       data-image="../PHOTOS/5.jpg"
     ></div>
     <script type="module" src="../src/js/staticPage.js?v=20260318-17"></script>

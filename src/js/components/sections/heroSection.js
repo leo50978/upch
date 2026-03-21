@@ -1,9 +1,18 @@
+import { defaultHeroContent, defaultHeroContentFr } from '../../data/heroContent.js';
+import { localizeContent, pickLocalized } from '../../i18n/localize.js';
 import { getHeroContent } from '../../store/heroStore.js';
+import { getLanguage } from '../../store/languageStore.js';
 import { escapeHtml } from '../../utils/escapeHtml.js';
 import { resolveSitePath } from '../../utils/sitePath.js';
 
 export function HeroSection() {
-  const heroContent = getHeroContent();
+  const locale = getLanguage();
+  const heroContent = localizeContent(
+    getHeroContent(),
+    defaultHeroContent,
+    defaultHeroContentFr,
+    locale
+  );
   const title = escapeHtml(heroContent.title);
   const description = escapeHtml(heroContent.description);
   const primaryLabel = escapeHtml(heroContent.primaryCta.label);
@@ -11,6 +20,9 @@ export function HeroSection() {
   const secondaryLabel = escapeHtml(heroContent.secondaryCta.label);
   const secondaryHref = escapeHtml(resolveSitePath(heroContent.secondaryCta.href));
   const imageUrl = escapeHtml(heroContent.imageUrl || 'PHOTOS/1.jpg');
+  const imageAlt = escapeHtml(
+    pickLocalized(locale, 'Children supported by LHUPC / AED', 'Enfants accompagnés par LHUPC / AED')
+  );
   const cycleTexts = Array.isArray(heroContent.cycleTexts) && heroContent.cycleTexts.length
     ? heroContent.cycleTexts
     : [heroContent.title];
@@ -37,7 +49,7 @@ export function HeroSection() {
             <div class="hero-section__mist hero-section__mist--left"></div>
             <div class="hero-section__mist hero-section__mist--bottom"></div>
             <div class="hero-section__image">
-              <img class="hero-photo" src="${imageUrl}" alt="Enfants accompagnés par LHUPC / AED" fetchpriority="high" decoding="async" />
+              <img class="hero-photo" src="${imageUrl}" alt="${imageAlt}" fetchpriority="high" decoding="async" />
             </div>
           </div>
         </div>

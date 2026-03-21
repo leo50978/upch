@@ -1,4 +1,7 @@
+import { defaultFooterContent, defaultFooterContentFr } from '../../data/footerContent.js';
+import { localizeContent, pickLocalized } from '../../i18n/localize.js';
 import { getFooterContent } from '../../store/footerStore.js';
+import { getLanguage } from '../../store/languageStore.js';
 import { escapeHtml } from '../../utils/escapeHtml.js';
 import { resolveSitePath } from '../../utils/sitePath.js';
 
@@ -17,9 +20,16 @@ function renderFooterColumn(column) {
 }
 
 export function Footer() {
-  const footerContent = getFooterContent();
+  const locale = getLanguage();
+  const footerContent = localizeContent(
+    getFooterContent(),
+    defaultFooterContent,
+    defaultFooterContentFr,
+    locale
+  );
   const logoUrl = escapeHtml(resolveSitePath(footerContent.brand.logoUrl || '/src/logo/ICON.png'));
   const logoAlt = escapeHtml(footerContent.brand.title || 'LHUPC');
+  const emailLabel = escapeHtml(pickLocalized(locale, 'Email', 'Email'));
 
   return `
     <footer id="footer" class="site-footer">
@@ -50,7 +60,7 @@ export function Footer() {
               type="email"
               name="email"
               placeholder="${escapeHtml(footerContent.newsletter.placeholder)}"
-              aria-label="Email"
+              aria-label="${emailLabel}"
             />
             <button type="button">${escapeHtml(footerContent.newsletter.buttonLabel)}</button>
           </form>

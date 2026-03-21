@@ -1,4 +1,7 @@
+import { defaultAboutContent, defaultAboutContentFr } from '../../data/aboutContent.js';
+import { localizeContent, pickLocalized } from '../../i18n/localize.js';
 import { getAboutContent } from '../../store/aboutStore.js';
+import { getLanguage } from '../../store/languageStore.js';
 import { escapeHtml } from '../../utils/escapeHtml.js';
 
 function renderCardIcon(variant) {
@@ -32,14 +35,21 @@ function renderAboutCard(card) {
 }
 
 export function AboutSection() {
-  const aboutContent = getAboutContent();
+  const locale = getLanguage();
+  const aboutContent = localizeContent(
+    getAboutContent(),
+    defaultAboutContent,
+    defaultAboutContentFr,
+    locale
+  );
+  const sectionTitle = escapeHtml(pickLocalized(locale, 'What we do', 'Ce que nous faisons'));
 
   return `
     <section id="about" class="about-section">
       <div class="about-section__shell">
         <div class="about-section__header">
           <h2 class="about-section__title">
-            <span class="section-rotator" data-animate-title>Ce que nous faisons</span>
+            <span class="section-rotator" data-animate-title>${sectionTitle}</span>
           </h2>
         </div>
         <div class="about-section__grid">

@@ -1,3 +1,6 @@
+import { defaultHeaderContent, defaultHeaderContentFr } from '../../data/headerContent.js';
+import { localizeContent, pickLocalized } from '../../i18n/localize.js';
+import { getLanguage, saveLanguage } from '../../store/languageStore.js';
 import { getHeaderContent } from '../../store/headerStore.js';
 import { escapeHtml } from '../../utils/escapeHtml.js';
 import { resolveSitePath, stripSiteBasePath } from '../../utils/sitePath.js';
@@ -68,14 +71,54 @@ function renderAction(action, mobile = false) {
   `;
 }
 
+function renderLanguageToggle(locale, mobile = false) {
+  const shellClass = mobile ? 'language-toggle language-toggle--mobile' : 'language-toggle';
+  const groupLabel = escapeHtml(pickLocalized(locale, 'Language switcher', 'Sélecteur de langue'));
+  const englishLabel = escapeHtml(pickLocalized(locale, 'Switch to English', 'Passer en anglais'));
+  const frenchLabel = escapeHtml(pickLocalized(locale, 'Switch to French', 'Passer en français'));
+
+  return `
+    <div class="${shellClass}" role="group" aria-label="${groupLabel}">
+      <button
+        type="button"
+        class="language-toggle__option ${locale === 'en' ? 'is-active' : ''}"
+        aria-pressed="${locale === 'en'}"
+        aria-label="${englishLabel}"
+        data-language-choice="en"
+      >
+        EN
+      </button>
+      <button
+        type="button"
+        class="language-toggle__option ${locale === 'fr' ? 'is-active' : ''}"
+        aria-pressed="${locale === 'fr'}"
+        aria-label="${frenchLabel}"
+        data-language-choice="fr"
+      >
+        FR
+      </button>
+    </div>
+  `;
+}
+
 export function Header() {
-  const headerContent = getHeaderContent();
+  const locale = getLanguage();
+  const headerContent = localizeContent(
+    getHeaderContent(),
+    defaultHeaderContent,
+    defaultHeaderContentFr,
+    locale
+  );
   const brandHref = escapeHtml(resolveSitePath(headerContent.brand.href || '/'));
   const brandAriaLabel = escapeHtml(headerContent.brand.ariaLabel || 'LHUPC / AED');
   const mobileNavigation = [
-    { id: 'nav-home-mobile', label: 'ACCUEIL', href: '/index.html' },
+    { id: 'nav-home-mobile', label: pickLocalized(locale, 'HOME', 'ACCUEIL'), href: '/index.html' },
     ...headerContent.navigation
   ];
+  const desktopNavLabel = escapeHtml(pickLocalized(locale, 'Primary navigation', 'Navigation principale'));
+  const mobileNavLabel = escapeHtml(pickLocalized(locale, 'Mobile navigation', 'Navigation mobile'));
+  const openMenuLabel = escapeHtml(pickLocalized(locale, 'Open menu', 'Ouvrir le menu'));
+  const closeMenuLabel = escapeHtml(pickLocalized(locale, 'Close menu', 'Fermer le menu'));
 
   return `
     <header class="site-header" data-header>
@@ -86,26 +129,28 @@ export function Header() {
           </a>
 
           <div class="site-header__desktop">
-            <nav class="site-header__nav" aria-label="Navigation principale">
+            <nav class="site-header__nav" aria-label="${desktopNavLabel}">
               ${headerContent.navigation.map((item) => renderNavItem(item)).join('')}
             </nav>
 
             <div class="site-header__actions">
+              ${renderLanguageToggle(locale)}
               ${headerContent.actions.map((action) => renderAction(action)).join('')}
             </div>
           </div>
 
-          <button class="menu-toggle" type="button" aria-expanded="false" aria-label="Ouvrir le menu" data-menu-toggle>
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-label="${openMenuLabel}" data-menu-toggle>
             <span class="menu-toggle__icon" data-lucide="menu" aria-hidden="true"></span>
             <span class="menu-toggle__icon menu-toggle__icon--close" data-lucide="x" aria-hidden="true"></span>
           </button>
         </div>
 
         <div class="site-header__mobile-panel" data-mobile-menu>
-          <button class="mobile-panel__close" type="button" aria-label="Fermer le menu" data-close-menu>
+          <button class="mobile-panel__close" type="button" aria-label="${closeMenuLabel}" data-close-menu>
             <span class="mobile-panel__close-icon" data-lucide="x" aria-hidden="true"></span>
           </button>
-          <nav class="site-header__mobile-nav" aria-label="Navigation mobile">
+          ${renderLanguageToggle(locale, true)}
+          <nav class="site-header__mobile-nav" aria-label="${mobileNavLabel}">
             ${mobileNavigation.map((item) => renderNavItem(item, true)).join('')}
           </nav>
 
@@ -136,6 +181,9 @@ export function setupHeader(scope = document) {
   const controller = new AbortController();
   const { signal } = controller;
   let lastScrollY = window.scrollY;
+  const locale = getLanguage();
+  const openMenuLabel = pickLocalized(locale, 'Open menu', 'Ouvrir le menu');
+  const closeMenuLabel = pickLocalized(locale, 'Close menu', 'Fermer le menu');
 
   const closeMenu = () => {
     if (!panel.classList.contains('is-open')) {
@@ -143,7 +191,7 @@ export function setupHeader(scope = document) {
     }
 
     button.setAttribute('aria-expanded', 'false');
-    button.setAttribute('aria-label', 'Ouvrir le menu');
+    button.setAttribute('aria-label', openMenuLabel);
     button.classList.remove('is-open');
     panel.classList.remove('is-open');
     document.body.classList.remove('menu-open');
@@ -151,7 +199,7 @@ export function setupHeader(scope = document) {
 
   const openMenu = () => {
     button.setAttribute('aria-expanded', 'true');
-    button.setAttribute('aria-label', 'Fermer le menu');
+    button.setAttribute('aria-label', closeMenuLabel);
     button.classList.add('is-open');
     panel.classList.add('is-open');
     document.body.classList.add('menu-open');
@@ -182,6 +230,24 @@ export function setupHeader(scope = document) {
 
   closers.forEach((link) => {
     link.addEventListener('click', closeMenu, { signal });
+  });
+
+  header.querySelectorAll('[data-language-choice]').forEach((option) => {
+    option.addEventListener(
+      'click',
+      () => {
+        const nextLocale = option.getAttribute('data-language-choice');
+
+        if (!nextLocale || nextLocale === getLanguage()) {
+          closeMenu();
+          return;
+        }
+
+        saveLanguage(nextLocale);
+        closeMenu();
+      },
+      { signal }
+    );
   });
 
   window.addEventListener('resize', () => {

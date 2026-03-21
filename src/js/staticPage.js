@@ -1,5 +1,8 @@
 import { Header, setupHeader } from './components/layout/header.js?v=20260318-11';
 import { Footer } from './components/layout/footer.js?v=20260318-4';
+import { applyPageMeta, getPageMeta } from './i18n/pageMeta.js';
+import { getStaticPageUi, translateStaticCopy } from './i18n/staticPageTranslations.js';
+import { applyLanguageToDocument, getLanguage, subscribeLanguage } from './store/languageStore.js';
 import { initCountAnimations } from './utils/countAnimation.js';
 
 const IMAGES = {
@@ -952,14 +955,16 @@ function renderAnimatedCount(value = '', className = '') {
 }
 
 function renderHomeAndLinks() {
+  const ui = getStaticPageUi(getLanguage());
+
   return `
     <div class="flex flex-wrap gap-3">
       <a href="../index.html" class="inline-flex max-w-full items-center justify-center gap-2 rounded-full bg-gradient-to-b from-[#89d7ff] via-[#5fb4ff] to-[#4d9cf2] px-5 py-3 text-center font-display text-sm font-black text-white shadow-lg shadow-sky-200/50 transition duration-200 hover:-translate-y-0.5">
-        Retour a l accueil
+        ${esc(ui.backHome)}
         <span data-lucide="arrow-left" class="lucide h-4 w-4"></span>
       </a>
       <a href="../liens.html" class="inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-brandBlue/20 bg-white px-5 py-3 text-center font-display text-sm font-black text-brandDeep shadow-sm transition duration-200 hover:-translate-y-0.5">
-        Voir tous les liens
+        ${esc(ui.allLinks)}
         <span data-lucide="link" class="lucide h-4 w-4"></span>
       </a>
     </div>
@@ -979,11 +984,14 @@ function renderPrimaryAction(action, fallback) {
 }
 
 function renderHero(section, page, description) {
+  const ui = getStaticPageUi(getLanguage());
   const bodyText = section.text || description || '';
   const panelStyle = `background:${section.panelBackground || 'linear-gradient(135deg, #eef5ff 0%, #ffffff 100%)'};`;
   const panelBody =
     section.panelText ||
-    'Retrouvez ici les informations essentielles a connaitre avant d aller plus loin.';
+    (getLanguage() === 'fr'
+      ? 'Retrouvez ici les informations essentielles a connaitre avant d aller plus loin.'
+      : 'Find here the essential information to know before going further.');
   const stats = (section.stats || [])
     .map(
       ({ value, label, note }) => `
@@ -1050,12 +1058,12 @@ function renderHero(section, page, description) {
           </div>
           <div class="flex flex-col gap-4">
             <div class="rounded-[2rem] border border-white/80 bg-white p-6 shadow-xl shadow-slate-100">
-              <p class="${eyebrowClass}">Lecture guidee</p>
+              <p class="${eyebrowClass}">${esc(ui.guidedReading)}</p>
               <h2 class="mt-3 font-display text-2xl font-black text-brandDeep">${esc(section.panelTitle)}</h2>
               <ul class="mt-4 space-y-3">${panelItems}</ul>
             </div>
             <div class="rounded-[2rem] p-6 shadow-xl shadow-slate-100" style="${panelStyle}">
-              <p class="${overlineBlueClass}">${esc(section.panelLabel || 'A retenir')}</p>
+              <p class="${overlineBlueClass}">${esc(section.panelLabel || ui.remember)}</p>
               <p class="mt-3 ${bodyClass}">${esc(panelBody)}</p>
             </div>
           </div>
@@ -1066,6 +1074,7 @@ function renderHero(section, page, description) {
 }
 
 function renderCards(section) {
+  const ui = getStaticPageUi(getLanguage());
   const cards = (section.cards || [])
     .map(
       ({ icon, title, text }) => `
@@ -1087,18 +1096,18 @@ function renderCards(section) {
           <div class="relative h-[22rem] w-full overflow-hidden">
             <img src="${esc(section.image)}" alt="${esc(section.title)}" class="h-full w-full object-cover" loading="lazy" decoding="async" />
             <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/40 to-transparent px-6 py-5">
-              <p class="font-display text-sm font-black uppercase tracking-[0.14em] sm:tracking-[0.24em] text-white/80">${esc(section.imageLabel || 'Image de terrain')}</p>
+              <p class="font-display text-sm font-black uppercase tracking-[0.14em] sm:tracking-[0.24em] text-white/80">${esc(section.imageLabel || ui.fieldImage)}</p>
             </div>
           </div>
           <div class="p-6">
-            <p class="${overlineBlueClass}">Angle de lecture</p>
+            <p class="${overlineBlueClass}">${esc(ui.readingAngle)}</p>
             <p class="mt-3 ${bodyClass}">${esc(section.intro)}</p>
           </div>
         </div>
 
         <div class="space-y-6">
           <div class="space-y-3">
-            <p class="${eyebrowClass}">Points cles</p>
+            <p class="${eyebrowClass}">${esc(ui.keyPoints)}</p>
             <h2 class="${sectionTitleClass}">${esc(section.title)}</h2>
             <p class="max-w-2xl ${bodyClass}">${esc(section.intro)}</p>
           </div>
@@ -1113,28 +1122,43 @@ function getTimelineIcon(step = {}, index = 0) {
   const title = String(step.title || '').toLowerCase();
 
   if (title.includes('ecout')) return 'ear';
+  if (title.includes('listen')) return 'ear';
   if (title.includes('prior')) return 'list-todo';
+  if (title.includes('scope')) return 'target';
   if (title.includes('execut') || title.includes('execution')) return 'play';
+  if (title.includes('execute')) return 'play';
   if (title.includes('partag') || title.includes('diffus')) return 'send';
+  if (title.includes('share') || title.includes('publish') || title.includes('distrib')) return 'send';
   if (title.includes('redact')) return 'square-pen';
+  if (title.includes('draft')) return 'square-pen';
   if (title.includes('valid')) return 'badge-check';
+  if (title.includes('confirm')) return 'badge-check';
   if (title.includes('revis')) return 'refresh-cw';
+  if (title.includes('revise') || title.includes('review')) return 'refresh-cw';
   if (title.includes('cadr')) return 'target';
   if (title.includes('protot')) return 'flask-conical';
+  if (title.includes('prototype')) return 'flask-conical';
   if (title.includes('capital')) return 'book-copy';
+  if (title.includes('learning') || title.includes('capture')) return 'book-copy';
   if (title.includes('terrain')) return 'map-pinned';
   if (title.includes('support')) return 'lifebuoy';
   if (title.includes('accompagn')) return 'hand-heart';
+  if (title.includes('guide')) return 'hand-heart';
   if (title.includes('supprimer')) return 'trash-2';
+  if (title.includes('delete')) return 'trash-2';
   if (title.includes('corriger')) return 'square-pen';
+  if (title.includes('correct')) return 'square-pen';
   if (title.includes('recuper')) return 'download';
+  if (title.includes('recover')) return 'download';
   if (title.includes('savoir')) return 'eye';
+  if (title.includes('know')) return 'eye';
 
   const fallbackIcons = ['sparkles', 'waypoints', 'rocket', 'flag'];
   return fallbackIcons[index % fallbackIcons.length];
 }
 
 function renderTimeline(section) {
+  const ui = getStaticPageUi(getLanguage());
   const steps = (section.steps || [])
     .map(
       (step, index) => `
@@ -1161,7 +1185,7 @@ function renderTimeline(section) {
     <section class="px-4 py-10 sm:px-6 lg:px-10" style="${sectionStyle(section.background)}">
       <div class="mx-auto w-full max-w-5xl space-y-6">
         <div class="space-y-3 text-center">
-          <p class="${overlineBlueClass}">Parcours</p>
+          <p class="${overlineBlueClass}">${esc(ui.journey)}</p>
           <h2 class="${sectionTitleClass}">${esc(section.title)}</h2>
           <p class="mx-auto max-w-3xl ${bodyClass}">${esc(section.intro)}</p>
         </div>
@@ -1172,6 +1196,7 @@ function renderTimeline(section) {
 }
 
 function renderMetrics(section) {
+  const ui = getStaticPageUi(getLanguage());
   const cards = (section.metrics || [])
     .map(
       ({ value, label, text }) => `
@@ -1202,7 +1227,7 @@ function renderMetrics(section) {
       <div class="mx-auto grid w-full max-w-6xl gap-8 lg:grid-cols-[1.05fr,0.95fr] lg:items-center">
         <div class="space-y-6">
           <div class="space-y-3">
-            <p class="${eyebrowClass}">Reperes</p>
+            <p class="${eyebrowClass}">${esc(ui.markers)}</p>
             <h2 class="${sectionTitleClass}">${esc(section.title)}</h2>
             <p class="max-w-2xl ${bodyClass}">${esc(section.intro)}</p>
           </div>
@@ -1263,6 +1288,7 @@ function renderSpotlight(section) {
 }
 
 function renderGallery(section) {
+  const ui = getStaticPageUi(getLanguage());
   const images = (section.images || [])
     .map(
       ({ src, caption }, index) => `
@@ -1278,7 +1304,7 @@ function renderGallery(section) {
     <section class="px-4 py-10 sm:px-6 lg:px-10" style="${sectionStyle(section.background)}">
       <div class="mx-auto w-full max-w-6xl space-y-6">
         <div class="space-y-3 text-center">
-          <p class="${overlineBlueClass}">Galerie</p>
+          <p class="${overlineBlueClass}">${esc(ui.gallery)}</p>
           <h2 class="${sectionTitleClass}">${esc(section.title)}</h2>
           <p class="mx-auto max-w-3xl ${bodyClass}">${esc(section.intro)}</p>
         </div>
@@ -1289,6 +1315,7 @@ function renderGallery(section) {
 }
 
 function renderDocuments(section) {
+  const ui = getStaticPageUi(getLanguage());
   const documents = (section.documents || [])
     .map(
       ({ icon, title, meta, text }) => `
@@ -1324,7 +1351,7 @@ function renderDocuments(section) {
       <div class="mx-auto grid w-full max-w-6xl gap-8 lg:grid-cols-[1.05fr,0.95fr] lg:items-start">
         <div class="space-y-5">
           <div class="space-y-3">
-            <p class="${overlineBlueClass}">Centre de ressources</p>
+            <p class="${overlineBlueClass}">${esc(ui.resourceCenter)}</p>
             <h2 class="${sectionTitleClass}">${esc(section.title)}</h2>
             <p class="max-w-2xl ${bodyClass}">${esc(section.intro)}</p>
           </div>
@@ -1393,15 +1420,19 @@ function renderSection(section, page, description) {
   }
 }
 
-function getPreset(title = '') {
-  return pagePresets[normalizeTitle(title)] || pagePresets['qui sommes nous'];
+function getPreset(pageKey = '') {
+  const normalizedKey = normalizeTitle(String(pageKey).replace(/-/g, ' '));
+  return pagePresets[normalizedKey] || pagePresets['qui sommes nous'];
 }
 
-function buildContent({ title, subtitle, description }) {
-  const preset = getPreset(title);
+function buildContent({ pageKey, description }) {
+  const locale = getLanguage();
+  const ui = getStaticPageUi(locale);
+  const preset = translateStaticCopy(getPreset(pageKey), locale);
+  const meta = getPageMeta(pageKey, locale);
   const page = {
-    label: title || 'Page',
-    subtitle: subtitle || 'Presentation',
+    label: meta.label || ui.pageLabel,
+    subtitle: meta.subtitle || ui.presentation,
     primaryAction: preset.primaryAction
   };
 
@@ -1409,13 +1440,13 @@ function buildContent({ title, subtitle, description }) {
 }
 
 function renderStaticPage(root) {
-  const { title, subtitle, description } = root.dataset || {};
+  const { pageKey, description } = root.dataset || {};
   let destroyHeader = () => {};
 
   root.innerHTML = `
     ${Header()}
     <main class="page-shell">
-      ${buildContent({ title, subtitle, description })}
+      ${buildContent({ pageKey, description })}
     </main>
     ${Footer()}
   `;
@@ -1437,6 +1468,8 @@ function applyLucideIcons() {
 const root = document.getElementById('static-app');
 
 if (root) {
+  applyLanguageToDocument();
+  applyPageMeta(root.dataset.pageKey || 'qui-sommes-nous');
   let cleanup = renderStaticPage(root);
   applyLucideIcons();
   let teardownCounters = initCountAnimations(root);
@@ -1472,4 +1505,18 @@ if (root) {
       { once: true }
     );
   });
+
+  const unsubscribeLanguage = subscribeLanguage((locale) => {
+    applyPageMeta(root.dataset.pageKey || 'qui-sommes-nous', locale);
+    rerender();
+  });
+
+  window.addEventListener(
+    'beforeunload',
+    () => {
+      teardownCounters();
+      unsubscribeLanguage();
+    },
+    { once: true }
+  );
 }

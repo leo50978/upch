@@ -1,11 +1,14 @@
 import { subscribeAboutContent } from './store/aboutStore.js';
+import { applyPageMeta } from './i18n/pageMeta.js';
 import { renderApp } from './app.js?v=20260318-12';
+import { pickLocalized } from './i18n/localize.js';
 import { subscribeFooterContent } from './store/footerStore.js';
 import { subscribeImpactContent } from './store/impactStore.js';
 import { subscribeHeroContent } from './store/heroStore.js';
 import { subscribeHeaderContent } from './store/headerStore.js';
 import { subscribeProjectsContent } from './store/projectsStore.js';
 import { subscribeSponsorContent } from './store/sponsorStore.js';
+import { applyLanguageToDocument, getLanguage, subscribeLanguage } from './store/languageStore.js';
 import { initCountAnimations } from './utils/countAnimation.js';
 
 const root = document.getElementById('app');
@@ -92,7 +95,24 @@ function showOpeningSplash() {
   }, 2100);
 }
 
+function updateOpeningSplashCopy(locale = getLanguage()) {
+  const quote = document.querySelector('.opening-boot__quote');
+
+  if (!quote) {
+    return;
+  }
+
+  quote.textContent = pickLocalized(
+    locale,
+    '"Helping underprivileged children"',
+    '« Aidons les enfants défavorisés »'
+  );
+}
+
 if (root) {
+  applyLanguageToDocument();
+  applyPageMeta('home');
+  updateOpeningSplashCopy();
   showOpeningSplash();
   let cleanup = renderApp(root);
   applyLucideIcons(root);
@@ -115,6 +135,11 @@ if (root) {
   const unsubscribeImpact = subscribeImpactContent(rerenderPage);
   const unsubscribeProjects = subscribeProjectsContent(rerenderPage);
   const unsubscribeSponsor = subscribeSponsorContent(rerenderPage);
+  const unsubscribeLanguage = subscribeLanguage((locale) => {
+    applyPageMeta('home', locale);
+    updateOpeningSplashCopy(locale);
+    rerenderPage();
+  });
 
   window.addEventListener(
     'beforeunload',
@@ -127,6 +152,7 @@ if (root) {
       unsubscribeImpact();
       unsubscribeProjects();
       unsubscribeSponsor();
+      unsubscribeLanguage();
     },
     { once: true }
   );

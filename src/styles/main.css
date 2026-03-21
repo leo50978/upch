@@ -355,6 +355,50 @@ blockquote {
   gap: 0.7rem;
 }
 
+.language-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.28rem;
+  border: 1px solid rgba(212, 219, 236, 0.95);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 16px 32px -26px rgba(52, 61, 119, 0.32);
+}
+
+.language-toggle--mobile {
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.language-toggle__option {
+  min-width: 54px;
+  min-height: 38px;
+  padding: 0.45rem 0.8rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: #4d5293;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.language-toggle__option.is-active {
+  background: linear-gradient(135deg, rgba(98, 169, 245, 0.16), rgba(255, 79, 200, 0.14));
+  color: #2d387f;
+}
+
+.language-toggle__option:is(:hover, :focus-visible) {
+  outline: none;
+  transform: translateY(-1px);
+}
+
 .site-header__mobile-actions {
   margin-top: 1rem;
 }
@@ -1906,6 +1950,10 @@ blockquote {
     display: flex;
     align-items: center;
     gap: 0.85rem;
+  }
+
+  .language-toggle {
+    flex: 0 0 auto;
   }
 
   .menu-toggle,

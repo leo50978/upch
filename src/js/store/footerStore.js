@@ -16,15 +16,20 @@ function normalizeLogoUrl(url) {
 function ensurePolicyLink(columns = []) {
   const safeColumns = Array.isArray(columns) ? columns.map((col) => ({ ...col, links: Array.isArray(col.links) ? [...col.links] : [] })) : [];
   const policyColumnIndex = safeColumns.findIndex((col) =>
-    String(col?.title || '').toLowerCase().includes('politique')
+    ['politique', 'policies', 'policy'].some((token) => String(col?.title || '').toLowerCase().includes(token))
   );
 
-  const policyLink = { id: 'footer-link-policy-main', label: 'Politiques', href: '/pages/politiques.html' };
+  const fallbackPolicyLink = cloneFooterContent(defaultFooterContent).columns[2]?.links?.[0] || {
+    id: 'footer-link-policy-main',
+    label: 'Policies',
+    href: '/pages/politiques.html'
+  };
+  const policyLink = { id: 'footer-link-policy-main', label: fallbackPolicyLink.label, href: '/pages/politiques.html' };
 
   if (policyColumnIndex === -1) {
     safeColumns.push({
       id: 'footer-column-policies',
-      title: 'Politiques',
+      title: cloneFooterContent(defaultFooterContent).columns[2]?.title || 'Policies',
       links: [policyLink]
     });
     return safeColumns;
